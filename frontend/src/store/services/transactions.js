@@ -1,22 +1,27 @@
 import feathersClient, { makeServicePlugin, BaseModel } from '../../feathers-client'
 
 // Extend the base class
-class Message extends BaseModel {
+class Transaction extends BaseModel {
   // eslint-disable-next-line no-useless-constructor
   constructor (data, options) {
     super(data, options)
   }
-  static modelName = 'Message'
+  static modelName = 'Transaction'
   static instanceDefaults () {
     return {
-      text: ''
+      from: '',
+      recipientAddress: '',
+      amount: '',
+      transactionHash: '',
+      transactionValue: '',
+      transactionObject: ''
     }
   }
 }
 
-const servicePath = 'messages'
+const servicePath = 'transactions'
 const servicePlugin = makeServicePlugin({
-  Model: Message,
+  Model: Transaction,
   service: feathersClient.service(servicePath),
   servicePath
 })
