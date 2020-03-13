@@ -5,8 +5,8 @@
         <q-toolbar-title>
           TX TRACKING DAPP
         </q-toolbar-title>
-        <q-btn flat>Signup</q-btn>
-        <q-btn flat>Login</q-btn>
+        <q-btn flat @click="$router.push({ name: 'RegisterUser' })">Signup</q-btn>
+        <q-btn flat @click="$router.push({ name: 'Login' })">Login</q-btn>
       </q-toolbar>
     </q-header>
     <q-page-container>
