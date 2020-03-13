@@ -3,7 +3,7 @@
     <q-header elevated>
       <q-toolbar class="q-pa-md">
         <q-toolbar-title>
-          TX TRACKING DAPP
+          Altcoinomy POC
         </q-toolbar-title>
         <q-btn flat @click="$router.push({ name: 'RegisterUser' })">Signup</q-btn>
         <q-btn flat @click="$router.push({ name: 'Login' })">Login</q-btn>

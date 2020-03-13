@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="q-pa-lg">
     <h5>Home page</h5>
     <p>
       We implement a simple and user-friendly procedure in line with the Swiss regulatory framework,
@@ -22,3 +22,8 @@ export default {
   name: 'HomePage'
 }
 </script>
+<style lang="sass" scoped>
+.my-card
+  width: 100%
+  max-width: 250px
+</style>
