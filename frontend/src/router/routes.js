@@ -19,6 +19,12 @@ const routes = [
         name: 'Login',
         props: true,
         component: () => import('pages/Login.vue')
+      },
+      {
+        path: '/welcome',
+        name: 'WelcomePage',
+        props: true,
+        component: () => import('pages/WelcomePage.vue')
       }
     ]
   }

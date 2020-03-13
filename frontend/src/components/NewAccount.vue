@@ -27,7 +27,6 @@
       debounce="200"
       hint="This will be shown to other users"
       :rules="[
-        val => isNameAvailable(val),
         val => (val && val.length > 0) || 'Please type a name',
         val => !val.includes(' ') || 'Must be a single word'
       ]"
@@ -63,24 +62,6 @@ export default {
     ...mapState('users', { loading: 'isCreatePending' })
   },
   methods: {
-    isNameAvailable (value) {
-      const { User } = this.$FeathersVuex.api
-      const query = {
-        query: {
-          // $select: [ '_id', 'nickname' ], // does not seem to work, TODO: check on next feathers-vuex upgrade
-          nickname: value
-        }
-      }
-      return User.find(query)
-        .then(response => {
-          if (response.total === 0) {
-            return true
-          }
-          // console.log('name is taken: ', response)
-          return 'This name is taken'
-        })
-        .catch(this.handleError)
-    },
     register () {
       if (this.valid) {
         const { User } = this.$FeathersVuex.api
@@ -89,13 +70,7 @@ export default {
           .save()
           .catch(this.handleError)
           .then(user => {
-            // console.log(user)
-            this.$q.notify({
-              message: 'Your account has been created, please login.',
-              position: 'top',
-              timeout: 5000,
-              color: 'positive'
-            })
+            console.log(user)
             this.$emit('registration-success')
             if (this.route && this.route.name === 'RegisterUser') {
               this.$router.push({ name: 'Login' })

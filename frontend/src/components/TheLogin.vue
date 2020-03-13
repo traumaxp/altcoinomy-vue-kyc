@@ -66,10 +66,6 @@ export default {
           email: this.user.email,
           password: this.user.password
         })
-          .catch(e => {
-            this.handleError(e)
-            this.$router.push({ name: 'RegisterUser' }) // TODO: push to a 'login issues' page instead
-          })
           .then(response => {
             // console.log(response)
             // console.log(response.body)
@@ -77,8 +73,7 @@ export default {
               this.$store.dispatch('postLogin', response.body).then(() => {
                 if (!this.hasType()) {
                   this.$router.push({
-                    name: 'UserProfileChoice',
-                    params: { nextRoute: this.nextRoute }
+                    name: 'WelcomePage'
                   })
                 } else {
                   if (this.nextRoute !== 'stay') {
