@@ -73,7 +73,7 @@ export default {
               this.$store.dispatch('postLogin', response.body).then(() => {
                 if (!this.hasType()) {
                   this.$router.push({
-                    name: 'WelcomePage'
+                    name: 'HomePage'
                   })
                 } else {
                   if (this.nextRoute !== 'stay') {

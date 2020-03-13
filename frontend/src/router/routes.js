@@ -6,8 +6,8 @@ const routes = [
     children: [
       {
         path: '',
-        name: 'LandingPage',
-        component: () => import('pages/LandingPage.vue')
+        name: 'Intro',
+        component: () => import('pages/Intro.vue')
       },
       {
         path: '/register',
@@ -21,10 +21,10 @@ const routes = [
         component: () => import('pages/Login.vue')
       },
       {
-        path: '/welcome',
-        name: 'WelcomePage',
+        path: '/homePage',
+        name: 'HomePage',
         props: true,
-        component: () => import('pages/WelcomePage.vue')
+        component: () => import('pages/HomePage.vue')
       }
     ]
   }

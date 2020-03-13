@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  name: 'LandingPage'
+  name: 'Intro'
 }
 </script>
 <style scoped>
