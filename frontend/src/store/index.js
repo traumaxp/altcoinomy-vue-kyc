@@ -1,54 +1,50 @@
+// ./src/store/store.js
 import Vue from 'vue'
 import Vuex from 'vuex'
-import state from './state'
-import getWeb3 from '../util/getWeb3'
-import web3 from 'web3'
-import { FeathersVuex } from '../feathers-client'
-
-// import example from './module-example'
+import { FeathersVuex } from 'feathers-vuex'
+import auth from './store.auth'
 
 Vue.use(Vuex)
 Vue.use(FeathersVuex)
 
-/*
- * If not building with SSR mode, you can
- * directly export the Store instantiation
- */
+// Require the entire folder of service plugins with Webpack
+// const requireModule = require.context('./services', false, /.js$/)
+// const servicePlugins = requireModule
+//   .keys()
+//   .map(modulePath => requireModule(modulePath).default)
+
+// Or you can import them manually for Rollup, etc.
+// import users from './services/users'
 import users from './services/users'
-import transactions from './services/transactions.js'
+import messages from './services/messages'
 export default new Vuex.Store({
-  strict: true,
-  plugins: [
-    // if you're using require.context, spread the plugins into the array.
-    // users, // if you're manually importing, just add the plugins into the array, like this
-    users,
-    transactions
-  ],
-  state,
+  state: {},
+  getters: {},
   mutations: {
-    registerWeb3Instance (state, payload) {
-      console.log('registerWeb3instance Mutation being executed', payload)
-      let result = payload
-      let web3Copy = state.web3
-      web3Copy.account = result.account
-      web3Copy.networkId = result.networkId
-      web3Copy.balance = web3.utils.fromWei(result.balance, 'ether')
-      web3Copy.isInjected = result.injectedWeb3
-      web3Copy.web3Instance = result.web3
-      state.web3 = web3Copy
+    createSession (state, session) {
+      // state.token = session.token
+      state = session
+    },
+
+    destroySession (state) {
+      // state.token = ''
+      state = []
     }
   },
   actions: {
-    registerWeb3 ({ commit }) {
-      console.log('registerWeb3 Action being executed')
-      getWeb3.then(result => {
-        console.log('committing result to registerWeb3Instance mutation')
-        commit('registerWeb3Instance', result)
-      }).catch(e => {
-        console.log('error in action registerWeb3', e)
-      })
+    postLogin ({ commit }, details) {
+      commit('createSession', details)
+    },
+
+    postLogout ({ commit }) {
+      commit('destroySession')
     }
-  }
-  // enable strict mode (adds overhead!)
-  // for dev mode only
+  },
+  plugins: [
+    // if you're using require.context, spread the plugins into the array.
+    // users, // if you're manually importing, just add the plugins into the array, like this
+    auth,
+    users,
+    messages
+  ]
 })

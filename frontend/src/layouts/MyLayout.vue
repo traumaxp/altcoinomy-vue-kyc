@@ -3,7 +3,7 @@
     <q-header elevated>
       <q-toolbar>
         <q-toolbar-title>
-          TX TRACKING DAPP
+          Quasar Chat App
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
