@@ -1,8 +1,12 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar>
-        <q-toolbar-title>Altcoinomy KYC</q-toolbar-title>
+      <q-toolbar class="q-pa-md">
+        <q-toolbar-title>
+          TX TRACKING DAPP
+        </q-toolbar-title>
+        <q-btn flat>Signup</q-btn>
+        <q-btn flat>Login</q-btn>
       </q-toolbar>
     </q-header>
     <q-page-container>
@@ -14,10 +18,7 @@
 <script>
 export default {
   name: 'MyLayout',
-  data () {
-    return {
-      leftDrawerOpen: false
-    }
-  }
+  data: () => ({
+  })
 }
 </script>
