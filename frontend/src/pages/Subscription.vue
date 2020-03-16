@@ -1,16 +1,14 @@
 <template>
-  <q-card flat class="q-pa-lg">
+  <q-card flat class="q-pa-md">
+      <p class="text-h6 q-pa-md on-right">Subscription List</p>
     <div class="text-center text-body1">
       <div class="row q-pa-sm">
       <div class="col">
-      <p class="text-h6">Subscription List</p>
       </div>
       <div class="col float-right">
       </div>
-      <div class="col">
-        <q-btn label="New"></q-btn>
       </div>
-      </div>
+      <q-btn label="New"></q-btn>
       <div class="q-pa-md">
     <q-markup-table>
       <thead>
