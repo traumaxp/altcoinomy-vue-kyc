@@ -26,6 +26,12 @@ const routes = [
         name: 'Subscription',
         props: true,
         component: () => import('pages/Subscription.vue')
+      },
+      {
+        path: '/subscription/new',
+        name: 'NewSubscription',
+        props: true,
+        component: () => import('pages/NewSubscription.vue')
       }
     ]
   }

@@ -1,22 +1,29 @@
 <template>
   <div>
-    <div class="text-center q-pa-lg text-body1">
-      <div class="row q-pa-xl">
+    <div class="q-pa-sm text-body1">
+      <div class="row q-pa-sm">
       <div class="col">
-      <p class="text-h4">Subscription list</p>
+      <p class="text-body1">Subscription new</p>
       </div>
+      <div class="col float-right">
+        <q-btn class="float-right" label="Cancel"></q-btn>
+      </div>
+      </div>
+      <div class="row q-pa-sm">
       <div class="col">
-        <q-btn label="New"></q-btn>
+      <p class="text-body1">I want to register as:</p>
+      <q-radio v-model="value" val="individual" label="An individual" />
+      <q-radio v-model="value" val="compagny" label="A compagny" />
       </div>
       </div>
       <div class="q-pa-md">
-    <q-markup-table class="fixed-center">
+    <q-markup-table>
       <thead>
         <tr>
-          <th class="text-left">Project</th>
-          <th class="text">Date of subscription</th>
-          <th class="text">Status</th>
-          <th class="text">Actions</th>
+          <th class="text-left">Logo</th>
+          <th class="text-left">Name</th>
+          <th class="text-left">Description</th>
+          <th class="text-left">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -47,10 +54,13 @@
 
 <script>
 export default {
-  name: 'Subscription'
+  name: 'NewSubscription',
+  data: () => ({
+    value: ''
+  })
 }
 </script>
 <style lang="sass" scoped>
 .q-markup-table
-  width: 80%
+  width: 100%
 </style>
