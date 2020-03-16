@@ -1,20 +1,40 @@
 <template>
   <div>
-    <q-card class="fixed-center q-pa-lg text-body1">
-      <h5>Subscription</h5><p>list</p>
-      <p>
-        Welcome to Altcoinomy's KYC onboarding platform! We implement a simple and user-friendly procedure in line with the Swiss regulatory framework,
-        that’s why you are asked to complete a brief « Know Your Customer » process.
-      </p>
-      <p>
-        <strong>
-          Altcoinomy is a Swiss-based supervised KYC operator who will be conducting anti money laundering analysis. Altcoinomy SA (CHE-209.239.695) is bound by Swiss laws on banking secrecy,
-           and will never distribute confidential information about you.
-        </strong>
-      </p>
-      <p>All data is encrypted and stored offline.</p>
-      <p>Let’s get started!</p>
-    </q-card>
+    <div class="text-center q-pa-lg text-body1">
+      <h5>Subscription list</h5>
+      <div class="q-pa-md">
+    <q-markup-table class="fixed-center">
+      <thead>
+        <tr>
+          <th class="text-left">Project</th>
+          <th class="text">Date of subscription</th>
+          <th class="text-right">Status</th>
+          <th class="text-right">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="text-left">Frozen Yogurt</td>
+          <td class="text">159</td>
+          <td class="text-right">6</td>
+          <td class="text-right">24</td>
+        </tr>
+        <tr>
+          <td class="text-left">Ice cream sandwich</td>
+          <td class="text">237</td>
+          <td class="text-right">9</td>
+          <td class="text-right">37</td>
+        </tr>
+        <tr>
+          <td class="text-left">Eclair</td>
+          <td class="text">262</td>
+          <td class="text-right">16</td>
+          <td class="text-right">23</td>
+        </tr>
+      </tbody>
+    </q-markup-table>
+  </div>
+    </div>
   </div>
 </template>
 
@@ -24,6 +44,6 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
-.q-card
-  width: 70%
+.q-markup-table
+  width: 60%
 </style>
