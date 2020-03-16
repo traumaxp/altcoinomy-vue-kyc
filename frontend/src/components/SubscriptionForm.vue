@@ -14,6 +14,9 @@
       </div>
       <div class="text-body1 q-pa-md">
 Demo project is a revolution, it will change the world.
+<div class="float-right">
+  Status of your subscription: Subscription pending
+</div>
 </div>
     <q-stepper
       v-model="step"
