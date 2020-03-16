@@ -3,7 +3,7 @@
     <div class="q-pa-sm text-body1">
       <div class="row">
       <div class="col">
-      <p class="text-h6">Subscription</p><p>New</p>
+      <p class="text-h6">Subscription New</p>
       </div>
       <div class="col float-right">
         <q-btn class="float-right" label="Cancel"></q-btn>
@@ -28,22 +28,16 @@
       </thead>
       <tbody>
         <tr>
-          <td class="text-left">Demo</td>
-          <td class="text">03/10/2020</td>
-          <td class="text">subscription_submitted</td>
-          <td class="text"><q-btn size="sm" label="edit"></q-btn></td>
+          <td class="text-left">Demo Logo</td>
+          <td class="text">Demo</td>
+          <td class="text">Demo project is a revolution, it will change the world.</td>
+          <td class="text"><q-btn size="sm" label="Participate"></q-btn></td>
         </tr>
         <tr>
           <td class="text-left">Demo</td>
-          <td class="text">03/10/2020</td>
-          <td class="text">subscription_pending</td>
-          <td class="text"><q-btn size="sm" label="edit"></q-btn></td>
-        </tr>
-        <tr>
-          <td class="text-left">Demo</td>
-          <td class="text">03/10/2020</td>
-          <td class="text">subscription_pending</td>
-          <td class="text"><q-btn size="sm" label="edit"></q-btn></td>
+          <td class="text">Auto_Onboard_ETH</td>
+          <td class="text">This ICO should auto-onboard ETH Tier 1 contributors.</td>
+          <td class="text"><q-btn size="sm" label="Completed 3 months ago"></q-btn></td>
         </tr>
       </tbody>
     </q-markup-table>

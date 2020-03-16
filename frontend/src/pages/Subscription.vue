@@ -1,16 +1,18 @@
 <template>
-  <div>
-    <div class="text-center q-pa-lg text-body1">
-      <div class="row q-pa-xl">
+  <q-card flat class="q-pa-lg">
+    <div class="text-center text-body1">
+      <div class="row q-pa-sm">
       <div class="col">
-      <p class="text-h4">Subscription list</p>
+      <p class="text-h6">Subscription List</p>
+      </div>
+      <div class="col float-right">
       </div>
       <div class="col">
         <q-btn label="New"></q-btn>
       </div>
       </div>
       <div class="q-pa-md">
-    <q-markup-table class="fixed-center">
+    <q-markup-table>
       <thead>
         <tr>
           <th class="text-left">Project</th>
@@ -42,7 +44,7 @@
     </q-markup-table>
   </div>
     </div>
-  </div>
+  </q-card>
 </template>
 
 <script>
@@ -52,5 +54,5 @@ export default {
 </script>
 <style lang="sass" scoped>
 .q-markup-table
-  width: 80%
+  width: 100%
 </style>
