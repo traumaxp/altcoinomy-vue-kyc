@@ -10,6 +10,7 @@
         <q-btn flat @click="$router.push({ name: 'Login' })">Login</q-btn>
         </div>
         <div v-if="user">
+        <q-btn flat @click="$router.push({ name: 'Subscription' })">Subscriptions</q-btn>
         <q-btn flat @click="logMeOut">Logout</q-btn>
         </div>
       </q-toolbar>
