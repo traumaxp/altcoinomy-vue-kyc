@@ -22,13 +22,6 @@ export default {
     authUser (newVal) {
       if (newVal === undefined || newVal === null) {
         // console.log('App.vue: User is now LOGGED OUT')
-        this.$q.notify({
-          message:
-            'You are now logged out, all information has been deleted from your device.',
-          position: 'top',
-          timeout: 10000,
-          color: 'primary'
-        })
         /* this.$router.push({ name: 'Login' })
           .catch(error => {
             if (error.name.includes('NavigationDuplicated')) {

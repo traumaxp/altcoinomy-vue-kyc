@@ -10,7 +10,7 @@
         <q-btn flat @click="$router.push({ name: 'Login' })">Login</q-btn>
         </div>
         <div v-if="user">
-        <q-btn flat @click="$router.push({ name: 'HomePage' })">Logout</q-btn>
+        <q-btn flat @click="logMeOut">Logout</q-btn>
         </div>
       </q-toolbar>
     </q-header>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'BaseLayout',
   data: () => ({
@@ -28,6 +29,14 @@ export default {
   computed: {
     user () {
       return this.$store.state.auth.user
+    }
+  },
+  methods: {
+    ...mapActions('auth', { logout: 'logout' }),
+    logMeOut () {
+      this.logout().then(() => {
+        this.$store.dispatch('postLogout')
+      })
     }
   }
 }
