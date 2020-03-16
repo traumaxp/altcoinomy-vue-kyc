@@ -47,7 +47,37 @@ Demo project is a revolution, it will change the world.
         icon="create_new_folder"
         :done="done2"
       >
-        An ad group contains one or more ads which target a shared set of keywords.
+        ID card front (side with MRZ)
+           <q-input outlined v-model="text" label="Outlined" />
+
+        ID card back (side without MRZ)
+           <q-input outlined v-model="text" label="Outlined" />
+        First name
+           <q-input outlined v-model="text" label="Outlined" />
+
+        Last name
+           <q-input outlined v-model="text" label="Outlined" />
+
+        Date of birth
+           <q-input outlined v-model="text" label="Outlined" />
+
+        Residential address
+           <q-input outlined v-model="text" label="Outlined" />
+        Zip code
+           <q-input outlined v-model="text" label="Outlined" />
+        City
+           <q-input outlined v-model="text" label="Outlined" />
+        Country
+           <q-input outlined v-model="text" label="Outlined" />
+
+        Nationality
+           <q-input outlined v-model="text" label="Outlined" />
+
+        Professional activity
+           <q-input outlined v-model="text" label="Outlined" />
+
+        Proof of Residence such as utility bill or bank statement (required if you plan to contribute more than CHF 15'000 equivalent).
+           <q-input outlined v-model="text" label="Outlined" />
 
         <q-stepper-navigation>
           <q-btn @click="() => { done2 = true; step = 3 }" color="primary" label="Continue" />
