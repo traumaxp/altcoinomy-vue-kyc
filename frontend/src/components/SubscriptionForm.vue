@@ -222,10 +222,11 @@ Sit amet purus gravida quis blandit turpis cursus. In fermentum et sollicitudin 
         your ads, find out how to tell if they're running and how to resolve approval issues.
 
         <q-stepper-navigation>
-          <q-btn color="primary" @click="done7 = true" label="Finish" />
+          <q-btn color="primary" @click="done7 = true" label="Finalize my KYC" />
           <q-btn flat @click="step = 6" color="primary" label="Back" class="q-ml-sm" />
         </q-stepper-navigation>
       </q-step>
+          <q-btn class="on-right" color="primary" @click="done7 = true" label="Finalize my KYC" />
     </q-stepper>
   </div>
   </q-card>
