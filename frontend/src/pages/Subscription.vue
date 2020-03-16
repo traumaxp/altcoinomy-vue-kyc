@@ -1,7 +1,14 @@
 <template>
   <div>
     <div class="text-center q-pa-lg text-body1">
-      <h5>Subscription list</h5>
+      <div class="row q-pa-xl">
+      <div class="col">
+      <p class="text-h4">Subscription list</p>
+      </div>
+      <div class="col">
+        <q-btn label="New"></q-btn>
+      </div>
+      </div>
       <div class="q-pa-md">
     <q-markup-table class="fixed-center">
       <thead>
