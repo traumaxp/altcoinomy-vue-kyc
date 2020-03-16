@@ -14,22 +14,22 @@
       </thead>
       <tbody>
         <tr>
-          <td class="text-left">Frozen Yogurt</td>
-          <td class="text">159</td>
-          <td class="text-right">6</td>
-          <td class="text-right">24</td>
+          <td class="text-left">Demo</td>
+          <td class="text">03/10/2020</td>
+          <td class="text-right">subscription_submitted</td>
+          <td class="text-right"><q-btn size="sm" label="edit"></q-btn></td>
         </tr>
         <tr>
-          <td class="text-left">Ice cream sandwich</td>
-          <td class="text">237</td>
-          <td class="text-right">9</td>
-          <td class="text-right">37</td>
+          <td class="text-left">Demo</td>
+          <td class="text">03/10/2020</td>
+          <td class="text-right">subscription_pending</td>
+          <td class="text-right"><q-btn size="sm" label="edit"></q-btn></td>
         </tr>
         <tr>
-          <td class="text-left">Eclair</td>
-          <td class="text">262</td>
-          <td class="text-right">16</td>
-          <td class="text-right">23</td>
+          <td class="text-left">Demo</td>
+          <td class="text">03/10/2020</td>
+          <td class="text-right">subscription_pending</td>
+          <td class="text-right"><q-btn size="sm" label="edit"></q-btn></td>
         </tr>
       </tbody>
     </q-markup-table>
@@ -45,5 +45,5 @@ export default {
 </script>
 <style lang="sass" scoped>
 .q-markup-table
-  width: 60%
+  width: 80%
 </style>
