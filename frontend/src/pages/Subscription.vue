@@ -8,28 +8,28 @@
         <tr>
           <th class="text-left">Project</th>
           <th class="text">Date of subscription</th>
-          <th class="text-right">Status</th>
-          <th class="text-right">Actions</th>
+          <th class="text">Status</th>
+          <th class="text">Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td class="text-left">Demo</td>
           <td class="text">03/10/2020</td>
-          <td class="text-right">subscription_submitted</td>
-          <td class="text-right"><q-btn size="sm" label="edit"></q-btn></td>
+          <td class="text">subscription_submitted</td>
+          <td class="text"><q-btn size="sm" label="edit"></q-btn></td>
         </tr>
         <tr>
           <td class="text-left">Demo</td>
           <td class="text">03/10/2020</td>
-          <td class="text-right">subscription_pending</td>
-          <td class="text-right"><q-btn size="sm" label="edit"></q-btn></td>
+          <td class="text">subscription_pending</td>
+          <td class="text"><q-btn size="sm" label="edit"></q-btn></td>
         </tr>
         <tr>
           <td class="text-left">Demo</td>
           <td class="text">03/10/2020</td>
-          <td class="text-right">subscription_pending</td>
-          <td class="text-right"><q-btn size="sm" label="edit"></q-btn></td>
+          <td class="text">subscription_pending</td>
+          <td class="text"><q-btn size="sm" label="edit"></q-btn></td>
         </tr>
       </tbody>
     </q-markup-table>
