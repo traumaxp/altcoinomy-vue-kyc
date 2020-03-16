@@ -1,17 +1,17 @@
 <template>
   <q-card flat class="q-pa-md">
-     <p class="text-h6 q-pa-md">Subscription New</p>
-    <div class="q-pa-sm text-body1">
-      <div class="row q-pa-sm">
+    <div class="row q-pa-md">
       <div class="col">
-      <p class="text-body1 q-pa-sm ">I want to register as:</p>
+            Subscription New <br>
+          I want to register as:
       <q-radio v-model="value" val="individual" label="An individual" />
       <q-radio v-model="value" val="compagny" label="A compagny" />
-     <q-btn class="float-right" label="Cancel"></q-btn>
-
-      </div>
-      </div>
-      <div class="q-pa-md">
+        </div>
+        <div class="col on-right">
+      <q-btn class="float-right" label="Cancel"></q-btn>
+        </div>
+        </div>
+        <div>
     <q-markup-table>
       <thead>
         <tr>
@@ -37,7 +37,6 @@
       </tbody>
     </q-markup-table>
   </div>
-    </div>
   </q-card>
 </template>
 
