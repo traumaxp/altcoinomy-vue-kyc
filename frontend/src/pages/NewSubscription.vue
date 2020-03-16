@@ -3,7 +3,7 @@
     <div class="q-pa-sm text-body1">
       <div class="row q-pa-sm">
       <div class="col">
-      <p class="text-body1">Subscription new</p>
+      <p class="text-h6">Subscription</p><p>New</p>
       </div>
       <div class="col float-right">
         <q-btn class="float-right" label="Cancel"></q-btn>
@@ -11,7 +11,7 @@
       </div>
       <div class="row q-pa-sm">
       <div class="col">
-      <p class="text-body1">I want to register as:</p>
+      <p class="text-body1 q-pa-sm ">I want to register as:</p>
       <q-radio v-model="value" val="individual" label="An individual" />
       <q-radio v-model="value" val="compagny" label="A compagny" />
       </div>
