@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <q-card flat class="q-pa-md">
     <div class="q-pa-sm text-body1">
-      <div class="row q-pa-sm">
+      <div class="row">
       <div class="col">
       <p class="text-h6">Subscription</p><p>New</p>
       </div>
@@ -49,7 +49,7 @@
     </q-markup-table>
   </div>
     </div>
-  </div>
+  </q-card>
 </template>
 
 <script>
