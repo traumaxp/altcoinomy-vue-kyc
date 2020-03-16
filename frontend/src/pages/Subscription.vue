@@ -1,5 +1,6 @@
 <template>
-  <q-card flat class="q-pa-md">
+<div>
+  <q-card v-if="this.$route.params.id === undefined" flat class="q-pa-md">
     <div class="row q-pa-md">
       <div class="col">
             Subscription List
@@ -41,11 +42,17 @@
     </q-markup-table>
         </div>
   </q-card>
+  <SubscriptionForm/>
+</div>
 </template>
 
 <script>
+import SubscriptionForm from '../components/SubscriptionForm'
 export default {
-  name: 'Subscription'
+  name: 'Subscription',
+  components: {
+    SubscriptionForm
+  }
 }
 </script>
 <style lang="sass" scoped>

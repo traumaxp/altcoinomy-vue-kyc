@@ -24,8 +24,14 @@ const routes = [
       {
         path: '/subscription',
         name: 'Subscription',
-        props: true,
-        component: () => import('pages/Subscription.vue')
+        component: () => import('pages/Subscription.vue'),
+        children: [
+          {
+            path: '/subscription/:id',
+            name: 'SubscriptionFocus',
+            component: () => import('pages/Subscription.vue')
+          }
+        ]
       },
       {
         path: '/subscription/new',
