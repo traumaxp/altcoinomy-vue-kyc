@@ -67,7 +67,7 @@ export default {
           password: this.user.password
         })
           .then(response => {
-            // console.log(response)
+            console.log(response)
             // console.log(response.body)
             if (response) {
               this.$store.dispatch('postLogin', response.body).then(() => {
