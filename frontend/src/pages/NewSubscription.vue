@@ -8,7 +8,7 @@
       <q-radio v-model="value" val="compagny" label="A compagny" />
         </div>
         <div class="col on-right">
-      <q-btn class="float-right" label="Cancel"></q-btn>
+      <q-btn class="float-right" @click="$router.push({ name: 'Subscription' })" label="Cancel"></q-btn>
         </div>
         </div>
         <div>

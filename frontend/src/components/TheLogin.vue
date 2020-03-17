@@ -1,6 +1,13 @@
 <template>
   <q-form v-model="valid" @submit.prevent="login" class="q-gutter-md">
     <q-input
+      class="username"
+      v-model="user.username"
+      label="Username"
+      required
+    />
+
+    <q-input
       class="email"
       v-model="user.email"
       data-email
@@ -24,6 +31,7 @@
   </q-form>
 </template>
 <script>
+import axios from 'axios'
 import { mapState, mapActions } from 'vuex'
 export default {
   name: 'TheLogin',
@@ -37,6 +45,7 @@ export default {
     valid: false,
     username: '',
     user: {
+      username: '',
       email: '',
       password: '' // No confirmation
     }
@@ -60,6 +69,16 @@ export default {
       }
     },
     login () {
+      axios({
+        method: 'post',
+        url: 'https://api-staging.altcoinomy.com/api/v1/auth_token',
+        data: {
+          username: this.user.username,
+          password: this.user.password
+        }
+      }).then(response => {
+        console.log(response)
+      })
       if (this.valid) {
         this.authenticate({
           strategy: 'local',

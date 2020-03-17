@@ -5,13 +5,10 @@
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const users = new mongooseClient.Schema({
-  
+    username: {},
     email: {type: String, unique: true, lowercase: true},
     password: { type: String },
-  
-  
     auth0Id: { type: String },
-  
   }, {
     timestamps: true
   });

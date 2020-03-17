@@ -6,7 +6,7 @@
             Subscription List
         </div>
         <div class="col on-right">
-      <q-btn class="float-right" label="New"></q-btn>
+      <q-btn class="float-right" @click="$router.push({ name: 'NewSubscription' })" label="New"></q-btn>
         </div>
         </div>
         <div>

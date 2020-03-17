@@ -1,6 +1,13 @@
 <template>
   <q-form v-model="valid" @submit.prevent="register" class="q-gutter-md">
     <q-input
+      class="username"
+      v-model="user.username"
+      label="Username"
+      required
+    />
+
+    <q-input
       class="fullname"
       v-model="user.fullname"
       label="Full Name"
@@ -43,17 +50,16 @@
     <div>
       <q-btn label="Submit" type="submit" :disabled="!valid" color="primary" />
     </div>
-      <q-btn @click="loadData" color="red" />
   </q-form>
 </template>
 <script>
-import axios from 'axios'
 import { mapState } from 'vuex'
 export default {
   name: 'NewAccount',
   data: vm => ({
     valid: false,
     user: {
+      username: '',
       fullname: '',
       nickname: '',
       email: '',
@@ -64,20 +70,6 @@ export default {
     ...mapState('users', { loading: 'isCreatePending' })
   },
   methods: {
-    loadData () {
-      axios.get(`https://api.openweathermap.org/data/2.5/find?q=nancy&units=imperial&appid=f92c1f4990b0574d4a4e4d3dd556f388`)
-        .then(response => {
-          console.log(response.data)
-        // this.setState({
-        //   weather: response.data.list[0],
-        //   temp: response.data.list[0].main.temp,
-        //   clouds: response.data.list[0].weather[0].description
-        // });
-        })
-        .catch(error => {
-          console.log('Error', error)
-        })
-    },
     register () {
       if (this.valid) {
         const { User } = this.$FeathersVuex.api

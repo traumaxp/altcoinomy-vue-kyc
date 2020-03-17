@@ -9,6 +9,7 @@ class User extends BaseModel {
   static modelName = 'User'
   static instanceDefaults () {
     return {
+      username: '',
       firstName: '',
       lastName: '',
       email: '',
