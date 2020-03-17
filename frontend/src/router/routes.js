@@ -34,6 +34,16 @@ const routes = [
         ]
       },
       {
+        path: '/validate',
+        name: 'validate',
+        component: () => import('pages/Validate.vue')
+      },
+      {
+        path: '/validate/resend',
+        name: 'validateResend',
+        component: () => import('pages/ValidateResend.vue')
+      },
+      {
         path: '/subscription/new',
         name: 'NewSubscription',
         props: true,

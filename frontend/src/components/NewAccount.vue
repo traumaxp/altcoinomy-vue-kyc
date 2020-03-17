@@ -81,7 +81,7 @@ export default {
             console.log(user)
             this.$emit('registration-success')
             if (this.route && this.route.name === 'RegisterUser') {
-              this.$router.push({ name: 'Login' })
+              this.$router.push({ name: 'Validate' })
             }
           })
       }
