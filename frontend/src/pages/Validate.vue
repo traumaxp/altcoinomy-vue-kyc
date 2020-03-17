@@ -3,7 +3,7 @@
     <q-card class="fixed-center q-gutter-md q-pa-md text-body1">
       <div class="q-gutter-md q-pa-md">
       <h4>Validate account</h4>
-      <q-link flat @click="$router.push({ name: 'validateResend' })">Resend validation code?</q-link>
+      <q-btn flat @click="$router.push({ name: 'validateResend' })">Resend validation code?</q-btn>
       <q-input
       label="Code"
       outlined

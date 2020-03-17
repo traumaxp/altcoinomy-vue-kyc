@@ -17,7 +17,11 @@ Vue.use(FeathersVuex)
 import users from './services/users'
 
 export default new Vuex.Store({
-  state: {},
+  state: {
+    status: '',
+    token: localStorage.getItem('token') || '',
+    user: {}
+  },
   getters: {},
   mutations: {
     createSession (state, session) {

@@ -28,6 +28,7 @@
     <div>
       <q-btn class="submit" label="Submit" type="submit" :disabled="!valid" color="primary" />
     </div>
+      <q-btn class="submit" label="Submit" @click="test" color="primary" />
   </q-form>
 </template>
 <script>
@@ -68,6 +69,16 @@ export default {
         )
       }
     },
+    test () {
+      axios({
+        method: 'get',
+        url: 'https://api-staging.altcoinomy.com/api/v1/icos'
+      }).then(response => {
+        console.log(response.data.token)
+        const token = response.data.token
+        axios.defaults.headers.common['Authorization'] = token
+      })
+    },
     login () {
       axios({
         method: 'post',
@@ -77,7 +88,9 @@ export default {
           password: this.user.password
         }
       }).then(response => {
-        console.log(response)
+        console.log(response.data.token)
+        const token = response.data.token
+        axios.defaults.headers.common['Authorization'] = token
       })
       if (this.valid) {
         this.authenticate({
