@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { FeathersVuex } from 'feathers-vuex'
 import auth from './store.auth'
+import axios from 'axios'
 
 Vue.use(Vuex)
 Vue.use(FeathersVuex)
@@ -24,6 +25,14 @@ export default new Vuex.Store({
   },
   getters: {},
   mutations: {
+    auth_request (state) {
+      state.status = 'loading'
+    },
+    auth_success (state, token, user) {
+      state.status = 'success'
+      state.token = token
+      state.user = user
+    },
     createSession (state, session) {
       // state.token = session.token
       state = session
@@ -35,6 +44,26 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    login ({ commit }, user) {
+      return new Promise((resolve, reject) => {
+        commit('auth_request')
+        axios({ url: 'https://api-staging.altcoinomy.com/api/v1/auth_token', data: user, method: 'POST' })
+          .then(resp => {
+            const token = resp.data.token
+            console.log(token)
+            const user = resp.data.user
+            localStorage.setItem('token', token)
+            axios.defaults.headers.common['Authorization'] = token
+            commit('auth_success', token, user)
+            resolve(resp)
+          })
+          .catch(err => {
+            commit('auth_error')
+            localStorage.removeItem('token')
+            reject(err)
+          })
+      })
+    },
     postLogin ({ commit }, details) {
       commit('createSession', details)
       // console.log('Post-login steps executed, session is ready, state contains auth.user')

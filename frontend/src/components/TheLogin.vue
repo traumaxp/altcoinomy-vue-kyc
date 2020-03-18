@@ -29,6 +29,7 @@
       <q-btn class="submit" label="Submit" type="submit" :disabled="!valid" color="primary" />
     </div>
       <q-btn class="submit" label="Submit" @click="test" color="primary" />
+      <q-btn class="submit" label="Submit" @click="getList" color="primary" />
   </q-form>
 </template>
 <script>
@@ -69,15 +70,22 @@ export default {
         )
       }
     },
-    test () {
-      axios({
+    getList () {
+      console.log(this.$store.state)
+      return axios('https://api-staging.altcoinomy.com/api/v1/exchange-rates', {
         method: 'get',
-        url: 'https://api-staging.altcoinomy.com/api/v1/icos'
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.token}`
+        }
       }).then(response => {
-        console.log(response.data.token)
-        const token = response.data.token
-        axios.defaults.headers.common['Authorization'] = token
+        console.log(response)
       })
+    },
+    test () {
+      console.log('start')
+      let username = 'traumaxp'
+      let password = 'Estoril54!'
+      this.$store.dispatch('login', { username, password })
     },
     login () {
       axios({
