@@ -36,9 +36,8 @@
         </tr>
       </tbody>
     </q-markup-table>
-    <div v-for="data in datas" :key="data.id">
+    Ico dispo:
         {{data}}
-    </div>
   </div>
   </q-card>
 </template>
@@ -49,18 +48,18 @@ export default {
   name: 'NewSubscription',
   data: () => ({
     value: '',
-    datas: []
+    data: []
   }),
   mounted () {
-    axios('https://api-staging.altcoinomy.com/api/v1/icos/', {
+    axios('https://api-staging.altcoinomy.com/api/v1/icos', {
       method: 'get',
       headers: {
         'Authorization': `Bearer ${this.$store.state.token}`
       }
     }
     ).then(res => {
-      console.log(res)
-      this.data = res
+      console.log(res.data)
+      this.data = res.data
     })
   }
 }
