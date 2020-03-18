@@ -81,25 +81,10 @@ export default {
         console.log(response)
       })
     },
-    test () {
-      console.log('start')
-      let username = 'traumaxp'
-      let password = 'Estoril54!'
-      this.$store.dispatch('login', { username, password })
-    },
     login () {
-      axios({
-        method: 'post',
-        url: 'https://api-staging.altcoinomy.com/api/v1/auth_token',
-        data: {
-          username: this.user.username,
-          password: this.user.password
-        }
-      }).then(response => {
-        console.log(response.data.token)
-        const token = response.data.token
-        axios.defaults.headers.common['Authorization'] = token
-      })
+      let username = this.user.username
+      let password = this.user.password
+      this.$store.dispatch('login', { username, password })
       if (this.valid) {
         this.authenticate({
           strategy: 'local',
