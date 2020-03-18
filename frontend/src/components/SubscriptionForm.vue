@@ -48,36 +48,36 @@ Demo project is a revolution, it will change the world.
         :done="done2"
       >
         ID card front (side with MRZ)
-           <q-input outlined v-model="text" label="FILLED (click to change)" />
+           <q-input outlined  label="FILLED (click to change)" />
 
         ID card back (side without MRZ)
-           <q-input outlined v-model="text" label="FILLED (click to change)" />
+           <q-input outlined  label="FILLED (click to change)" />
         First name
-           <q-input outlined v-model="text" label="FILLED (click to change)" />
+           <q-input outlined  label="FILLED (click to change)" />
 
         Last name
-           <q-input outlined v-model="text" label="FILLED (click to change)" />
+           <q-input outlined  label="FILLED (click to change)" />
 
         Date of birth
-           <q-input outlined v-model="text" label="FILLED (click to change)" />
+           <q-input outlined  label="FILLED (click to change)" />
 
         Residential address
-           <q-input outlined v-model="text" label="FILLED (click to change)" />
+           <q-input outlined  label="FILLED (click to change)" />
         Zip code
-           <q-input outlined v-model="text" label="FILLED (click to change)" />
+           <q-input outlined  label="FILLED (click to change)" />
         City
-           <q-input outlined v-model="text" label="FILLED (click to change)" />
+           <q-input outlined  label="FILLED (click to change)" />
         Country
-           <q-input outlined v-model="text" label="FILLED (click to change)" />
+           <q-input outlined  label="FILLED (click to change)" />
 
         Nationality
-           <q-input outlined v-model="text" label="FILLED (click to change)" />
+           <q-input outlined  label="FILLED (click to change)" />
 
         Professional activity
-           <q-input outlined v-model="text" label="FILLED (click to change)" />
+           <q-input outlined  label="FILLED (click to change)" />
 
         Proof of Residence such as utility bill or bank statement (required if you plan to contribute more than CHF 15'000 equivalent).
-           <q-input outlined v-model="text" label="FILLED (click to change)" />
+           <q-input outlined  label="FILLED (click to change)" />
 
         <q-stepper-navigation>
           <q-btn @click="() => { done2 = true; step = 3 }" color="primary" label="Continue" />
@@ -93,15 +93,15 @@ Demo project is a revolution, it will change the world.
         :done="done3"
       >
         Name / Surname or Company name
-         <q-input outlined v-model="text"/>
+         <q-input outlined />
 Date of birth or Date of incorporation
- <q-input outlined v-model="text" />
+ <q-input outlined  />
 Address
- <q-input outlined v-model="text" />
+ <q-input outlined  />
 Nationality
         <q-select outlined v-model="model" :options="country" />
 Current Location
- <q-input outlined v-model="text" />
+ <q-input outlined  />
 Signature of the counterparty <br>
 PAD PAD
 

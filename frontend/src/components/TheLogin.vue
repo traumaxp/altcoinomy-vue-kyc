@@ -28,12 +28,9 @@
     <div>
       <q-btn class="submit" label="Submit" type="submit" :disabled="!valid" color="primary" />
     </div>
-      <q-btn class="submit" label="Submit" @click="test" color="primary" />
-      <q-btn class="submit" label="Submit" @click="getList" color="primary" />
   </q-form>
 </template>
 <script>
-import axios from 'axios'
 import { mapState, mapActions } from 'vuex'
 export default {
   name: 'TheLogin',
@@ -69,17 +66,6 @@ export default {
           this.authUser.isAdmin
         )
       }
-    },
-    getList () {
-      console.log(this.$store.state)
-      return axios('https://api-staging.altcoinomy.com/api/v1/exchange-rates', {
-        method: 'get',
-        headers: {
-          'Authorization': `Bearer ${this.$store.state.token}`
-        }
-      }).then(response => {
-        console.log(response)
-      })
     },
     login () {
       let username = this.user.username

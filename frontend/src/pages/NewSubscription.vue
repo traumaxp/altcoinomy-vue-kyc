@@ -36,16 +36,33 @@
         </tr>
       </tbody>
     </q-markup-table>
+    <div v-for="data in datas" :key="data.id">
+        {{data}}
+    </div>
   </div>
   </q-card>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'NewSubscription',
   data: () => ({
-    value: ''
-  })
+    value: '',
+    datas: []
+  }),
+  mounted () {
+    axios('https://api-staging.altcoinomy.com/api/v1/icos/', {
+      method: 'get',
+      headers: {
+        'Authorization': `Bearer ${this.$store.state.token}`
+      }
+    }
+    ).then(res => {
+      console.log(res)
+      this.data = res
+    })
+  }
 }
 </script>
 <style lang="sass" scoped>

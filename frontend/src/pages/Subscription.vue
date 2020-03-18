@@ -52,6 +52,10 @@ export default {
   name: 'Subscription',
   components: {
     SubscriptionForm
+  },
+  data: () => ({
+  }),
+  methods: {
   }
 }
 </script>
