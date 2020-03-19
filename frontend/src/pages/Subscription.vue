@@ -6,7 +6,7 @@
             Subscription List
         </div>
         <div class="col on-right">
-      <q-btn class="float-right" @click="newSubscription" label="New"></q-btn>
+      <q-btn class="float-right" @click="newSubscription('5e732f58908460164d3d310a')" label="New"></q-btn>
         </div>
         </div>
         <div>
@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import SubscriptionForm from '../components/SubscriptionForm'
 export default {
   name: 'Subscription',
@@ -56,9 +57,22 @@ export default {
   data: () => ({
   }),
   methods: {
-    newSubscription () {
+    newSubscription (id) {
       console.log('create new subscription')
+      console.log(id)
       this.$router.push({ name: 'NewSubscription' })
+      axios({ url: 'https://api-staging.altcoinomy.com/api/v1/subscriptions',
+        ico: id,
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.token}`
+        },
+        method: 'POST' })
+        .then(resp => {
+          console.log(resp)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }

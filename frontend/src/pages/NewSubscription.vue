@@ -57,6 +57,16 @@ export default {
     }
   },
   mounted () {
+    axios('https://api-staging.altcoinomy.com/api/v1/exchange-rates', {
+      method: 'get',
+      headers: {
+        'Authorization': `Bearer ${this.$store.state.token}`
+      }
+    }
+    ).then(res => {
+      console.log(res.data)
+      this.data = res.data
+    })
     axios('https://api-staging.altcoinomy.com/api/v1/icos', {
       method: 'get',
       headers: {
