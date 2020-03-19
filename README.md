@@ -1,4 +1,4 @@
-# txTrackingDapp
+# Altcoinomy-vue-kyc
 
 This is a POC in Quasar (Vuejs) of Altcoinomy-kyc
 
