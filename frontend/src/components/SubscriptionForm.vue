@@ -103,7 +103,13 @@ Nationality
 Current Location
  <q-input outlined  />
 Signature of the counterparty <br>
-PAD PAD
+<div id="app">
+    <VueSignaturePad width="500px" height="500px" ref="signaturePad" />
+    <div>
+      <button @click="save">Save</button>
+      <button @click="undo">Undo</button>
+    </div>
+  </div>
 
         <q-stepper-navigation>
           <q-btn @click="() => { done3 = true; step = 4 }" color="primary" label="Continue" />
@@ -232,6 +238,10 @@ Sit amet purus gravida quis blandit turpis cursus. In fermentum et sollicitudin 
   </q-card>
 </template>
 <script>
+import Vue from 'vue'
+import VueSignaturePad from 'vue-signature-pad'
+Vue.use(VueSignaturePad)
+
 export default {
   name: 'SubscriptionForm',
   data: () => ({
@@ -253,6 +263,14 @@ export default {
 
   }),
   methods: {
+    undo () {
+      this.$refs.signaturePad.undoSignature()
+    },
+    save () {
+      const { isEmpty, data } = this.$refs.signaturePad.saveSignature()
+      console.log(isEmpty)
+      console.log(data)
+    },
     reset () {
       this.done1 = false
       this.done2 = false

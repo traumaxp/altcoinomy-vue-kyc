@@ -74,8 +74,9 @@ export default {
       }
     }
     ).then(res => {
-      console.log(res.data)
-      this.data = res.data
+      console.log(res.data[0].toString())
+    }).catch(err => {
+      console.log(err)
     })
   }
 }
