@@ -2,15 +2,15 @@
   <q-card v-if="this.$route.params.id !== undefined" flat class="q-pa-md">
     <div class="row q-pa-md">
       <div class="col">
-            Subscription List
+            Subscription Edit
         </div>
         <div class="col on-right">
-      <q-btn class="float-right" label="Cancel"></q-btn>
+      <q-btn class="float-right" @click="$router.push({ name: 'Subscription' })" label="Cancel"></q-btn>
         </div>
         </div>
     <div class="q-pa-md">
       <div class="text-h6">
-      Demo
+      Demo, project id: {{this.$route.params.id}}
       </div>
       <div class="text-body1 q-pa-md">
 Demo project is a revolution, it will change the world.

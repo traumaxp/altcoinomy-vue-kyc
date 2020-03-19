@@ -28,7 +28,7 @@ const routes = [
         children: [
           {
             path: '/subscription/:id',
-            name: 'SubscriptionFocus',
+            name: 'SubscriptionFill',
             component: () => import('pages/Subscription.vue')
           }
         ]

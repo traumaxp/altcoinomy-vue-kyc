@@ -26,7 +26,7 @@
           <td class="text-left">Demo Logo</td>
           <td class="text">Demo</td>
           <td class="text">Demo project is a revolution, it will change the world.</td>
-          <td class="text"><q-btn size="sm" label="Participate"></q-btn></td>
+          <td class="text"><q-btn size="sm" @click="redirection" label="Participate"></q-btn></td>
         </tr>
         <tr>
           <td class="text-left">Demo</td>
@@ -50,6 +50,12 @@ export default {
     value: '',
     data: []
   }),
+  methods: {
+    redirection () {
+      console.log('redirect')
+      this.$router.push({ name: 'SubscriptionFill', params: { id: '123' } })
+    }
+  },
   mounted () {
     axios('https://api-staging.altcoinomy.com/api/v1/icos', {
       method: 'get',

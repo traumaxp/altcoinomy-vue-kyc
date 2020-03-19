@@ -6,7 +6,7 @@
             Subscription List
         </div>
         <div class="col on-right">
-      <q-btn class="float-right" @click="$router.push({ name: 'NewSubscription' })" label="New"></q-btn>
+      <q-btn class="float-right" @click="newSubscription" label="New"></q-btn>
         </div>
         </div>
         <div>
@@ -56,6 +56,10 @@ export default {
   data: () => ({
   }),
   methods: {
+    newSubscription () {
+      console.log('create new subscription')
+      this.$router.push({ name: 'NewSubscription' })
+    }
   }
 }
 </script>
