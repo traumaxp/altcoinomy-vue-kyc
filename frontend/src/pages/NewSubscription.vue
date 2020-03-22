@@ -36,8 +36,9 @@
         </tr>
       </tbody>
     </q-markup-table>
-    Ico dispo:
-        {{data}}
+     <li v-for="ico in icos" :key="ico.id">
+      {{ ico.name }}
+     </li>
   </div>
   </q-card>
 </template>
@@ -48,7 +49,9 @@ export default {
   name: 'NewSubscription',
   data: () => ({
     value: '',
-    data: []
+    logo: '',
+    icos: [],
+    description: ''
   }),
   methods: {
     redirection () {
@@ -65,8 +68,7 @@ export default {
     }
     ).then(res => {
       const array = Object.values(res.data)
-      console.log(array[0].id)
-      console.log(array[0].event)
+      this.icos = array
     }).catch(err => {
       console.log(err)
     })
