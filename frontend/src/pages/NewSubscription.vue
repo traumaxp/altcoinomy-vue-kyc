@@ -26,7 +26,10 @@
           <td class="text-left">Demo Logo</td>
           <td class="text">{{ico.name}}</td>
           <div style="height: 200px" class="text">{{ico.description}}</div>
-          <td class="text"><q-btn size="sm" @click="redirection(ico.id)" label="Participate"></q-btn></td>
+          <td class="text">
+            <q-btn v-if="ico.date_to < dateNow" size="sm" color="red" disable label="completed"></q-btn>
+            <q-btn v-if="ico.date_to > dateNow" size="sm" color="blue" @click="redirection(ico.id)" label="Participate"></q-btn>
+            </td>
         </tr>
       </tbody>
     </q-markup-table>
@@ -35,6 +38,10 @@
 </template>
 
 <script>
+import { date } from 'quasar'
+
+let timeStamp = Date.now()
+let formattedString = date.formatDate(timeStamp, 'YYYY-MM-DDTHH:mm:ss.SSSZ')
 import axios from 'axios'
 export default {
   name: 'NewSubscription',
@@ -42,7 +49,8 @@ export default {
     value: '',
     logo: '',
     icos: [],
-    description: ''
+    description: '',
+    dateNow: formattedString
   }),
   methods: {
     redirection (value) {
@@ -59,6 +67,7 @@ export default {
     }
     ).then(res => {
       const array = Object.values(res.data)
+      console.log(array)
       this.icos = array
     }).catch(err => {
       console.log(err)
