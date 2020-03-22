@@ -25,7 +25,7 @@
         <tr v-for="ico in icos" :key="ico.id">
           <td class="text-left">Demo Logo</td>
           <td class="text">{{ico.name}}</td>
-          <div style="height: 150px" class="text-center">{{ico.description}}</div>
+          <div style="height: 200px" class="text">{{ico.description}}</div>
           <td class="text"><q-btn size="sm" @click="redirection(ico.id)" label="Participate"></q-btn></td>
         </tr>
       </tbody>
