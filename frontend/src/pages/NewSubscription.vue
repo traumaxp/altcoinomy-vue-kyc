@@ -56,7 +56,7 @@ export default {
       this.$router.push({ name: 'SubscriptionFill', params: { id: '5e732f58908460164d3d310a' } })
     }
   },
-  mounted () {
+  created () {
     axios('https://api-staging.altcoinomy.com/api/v1/icos', {
       method: 'get',
       headers: {
@@ -64,7 +64,9 @@ export default {
       }
     }
     ).then(res => {
-      console.log(res.data)
+      const array = Object.values(res.data)
+      console.log(array[0].id)
+      console.log(array[0].event)
     }).catch(err => {
       console.log(err)
     })
