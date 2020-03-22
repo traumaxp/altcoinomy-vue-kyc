@@ -22,23 +22,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr v-for="ico in icos" :key="ico.id">
           <td class="text-left">Demo Logo</td>
-          <td class="text">Demo</td>
-          <td class="text">Demo project is a revolution, it will change the world.</td>
-          <td class="text"><q-btn size="sm" @click="redirection" label="Participate"></q-btn></td>
-        </tr>
-        <tr>
-          <td class="text-left">Demo</td>
-          <td class="text">Auto_Onboard_ETH</td>
-          <td class="text">This ICO should auto-onboard ETH Tier 1 contributors.</td>
-          <td class="text"><q-btn size="sm" label="Completed 3 months ago"></q-btn></td>
+          <td class="text">{{ico.name}}</td>
+          <div style="height: 150px" class="text-center">{{ico.description}}</div>
+          <td class="text"><q-btn size="sm" @click="redirection(ico.id)" label="Participate"></q-btn></td>
         </tr>
       </tbody>
     </q-markup-table>
-     <li v-for="ico in icos" :key="ico.id">
-      {{ ico.name }}
-     </li>
   </div>
   </q-card>
 </template>
@@ -54,9 +45,9 @@ export default {
     description: ''
   }),
   methods: {
-    redirection () {
-      console.log('redirect')
-      this.$router.push({ name: 'SubscriptionFill', params: { id: '5e732f58908460164d3d310a' } })
+    redirection (value) {
+      console.log('redirect', value)
+      this.$router.push({ name: 'SubscriptionFill', params: { id: value } })
     }
   },
   created () {
