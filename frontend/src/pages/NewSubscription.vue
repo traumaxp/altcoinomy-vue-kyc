@@ -4,8 +4,8 @@
       <div class="col">
             Subscription New <br>
           I want to register as:
-      <q-radio v-model="value" val="individual" label="An individual" />
-      <q-radio v-model="value" val="compagny" label="A compagny" />
+      <q-radio v-model="registerAs" val="individual" label="An individual" />
+      <q-radio v-model="registerAs" val="compagny" label="A compagny" />
         </div>
         <div class="col on-right">
       <q-btn class="float-right" @click="$router.push({ name: 'Subscription' })" label="Cancel"></q-btn>
@@ -46,16 +46,33 @@ import axios from 'axios'
 export default {
   name: 'NewSubscription',
   data: () => ({
-    value: '',
+    registerAs: '',
     logo: '',
     icos: [],
     description: '',
     dateNow: formattedString
   }),
   methods: {
-    redirection (value) {
-      console.log('redirect', value)
-      this.$router.push({ name: 'SubscriptionFill', params: { id: value } })
+    newSubscription (icoId) {
+      console.log(icoId)
+      console.log(this.registerAs)
+      axios('https://api-staging.altcoinomy.com/api/v1/subscriptions', {
+        method: 'post',
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.token}`
+        },
+        data: {
+          ico: icoId,
+          register_as: this.registerAs
+        }
+      }).then(res => {
+        console.log(res)
+      })
+    },
+    redirection (icoId) {
+      console.log('redirect', icoId)
+      this.newSubscription(icoId)
+      this.$router.push({ name: 'SubscriptionFill', params: { id: icoId } })
     }
   },
   created () {
