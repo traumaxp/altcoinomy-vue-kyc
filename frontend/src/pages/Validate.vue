@@ -2,13 +2,20 @@
   <div>
     <q-card class="fixed-center q-gutter-md q-pa-md text-body1">
       <div class="q-gutter-md q-pa-md">
-      <h4>Validate account</h4>
-      <q-btn flat @click="$router.push({ name: 'validateResend' })">Resend validation code?</q-btn>
-      <q-input
-      label="Code"
-      outlined
-      />
-      <q-btn class="q-pa-md" label="Validate" color="primary" />
+        <h4>Validate account</h4>
+        <q-btn
+          flat
+          @click="$router.push({ name: 'validateResend' })"
+        >Resend validation code?</q-btn>
+        <q-input
+          label="Code"
+          outlined
+        />
+        <q-btn
+          class="q-pa-md"
+          label="Validate"
+          color="primary"
+        />
       </div>
     </q-card>
   </div>

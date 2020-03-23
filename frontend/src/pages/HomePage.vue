@@ -9,7 +9,7 @@
       <p>
         <strong>
           Altcoinomy is a Swiss-based supervised KYC operator who will be conducting anti money laundering analysis. Altcoinomy SA (CHE-209.239.695) is bound by Swiss laws on banking secrecy,
-           and will never distribute confidential information about you.
+          and will never distribute confidential information about you.
         </strong>
       </p>
       <p>All data is encrypted and stored offline.</p>

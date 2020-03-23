@@ -1,5 +1,9 @@
 <template>
-  <q-form v-model="valid" @submit.prevent="register" class="q-gutter-md">
+  <q-form
+    v-model="valid"
+    @submit.prevent="register"
+    class="q-gutter-md"
+  >
     <q-input
       class="username"
       v-model="user.username"
@@ -48,7 +52,12 @@
       required
     />
     <div>
-      <q-btn label="Submit" type="submit" :disabled="!valid" color="primary" />
+      <q-btn
+        label="Submit"
+        type="submit"
+        :disabled="!valid"
+        color="primary"
+      />
     </div>
   </q-form>
 </template>

@@ -1,6 +1,9 @@
 <template>
   <q-page class="flex flex-center">
-    <div class="q-pa-md" style="max-width: 400px">
+    <div
+      class="q-pa-md"
+      style="max-width: 400px"
+    >
       <the-login :nextRoute="nextRoute" />
     </div>
   </q-page>
