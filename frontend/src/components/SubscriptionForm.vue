@@ -69,69 +69,69 @@
           ID card front (side with MRZ)
           <q-uploader
             outlined
-            label="FILLED (click to change)"
+            :label="formStatus.individual.IdCardFront"
           />
 
           ID card back (side without MRZ)
           <q-uploader
             outlined
-            label="FILLED (click to change)"
+            :label="formStatus.individual.IdCardBack"
           />
           First name
           <q-input
             outlined
-            label="FILLED (click to change)"
+            :label="formStatus.individual.firstname"
           />
 
           Last name
           <q-input
             outlined
-            label="FILLED (click to change)"
+            :label="formStatus.individual.lastname"
           />
 
           Date of birth
           <q-input
             outlined
-            label="FILLED (click to change)"
+            :label="formStatus.individual.dateOfBirth"
           />
 
           Residential address
           <q-input
             outlined
-            label="FILLED (click to change)"
+            :label="formStatus.individual.residentialAddress"
           />
           Zip code
           <q-input
             outlined
-            label="FILLED (click to change)"
+            :label="formStatus.individual.zipCode"
           />
           City
           <q-input
             outlined
-            label="FILLED (click to change)"
+            :label="formStatus.individual.city"
           />
           Country
           <q-input
             outlined
-            label="FILLED (click to change)"
+            :label="formStatus.individual.country"
           />
 
           Nationality
           <q-input
             outlined
-            label="FILLED (click to change)"
+            :label="formStatus.individual.nationality"
           />
 
           Professional activity
           <q-input
             outlined
-            label="FILLED (click to change)"
+            :label="formStatus.individual.professionalActivity"
           />
 
           Proof of Residence such as utility bill or bank statement (required if you plan to contribute more than CHF 15'000 equivalent).
           <q-uploader
             outlined
-            label="FILLED (click to change)"
+            :label="formStatus.individual.utilityBill"
           />
 
           <q-stepper-navigation>
@@ -400,7 +400,21 @@ export default {
   name: 'SubscriptionForm',
   data: () => ({
     formStatus: {
-      subscribeAs: ''
+      subscribeAs: '',
+      individual: {
+        IdCardFront: '',
+        IdCardBack: '',
+        firstname: '',
+        lastname: '',
+        dateOfBirth: '',
+        residentialAddress: '',
+        zipCode: '',
+        city: '',
+        country: '',
+        nationality: '',
+        professionalActivity: '',
+        utilityBill: ''
+      }
     },
     register_as: '',
     videoConferenceDate: '',
@@ -461,12 +475,38 @@ export default {
           'Authorization': `Bearer ${this.$store.state.token}`
         }
       }).then(res => {
-        console.log(res.data.groups.basics.fields.subscribed_as.status)
+        let individualFields = res.data.groups.individual.fields
+        console.log(individualFields.id_card_front.status)
         this.formStatus.subscribeAs = res.data.groups.basics.fields.subscribed_as.status
+        this.formStatus.individual.IdCardFront = individualFields.id_card_front.status
+        this.formStatus.individual.IdCardBack = individualFields.id_card_back.status
+        this.formStatus.individual.firstname = individualFields.firstname.status
+        this.formStatus.individual.lastname = individualFields.lastname.status
+        this.formStatus.individual.dateOfBirth = individualFields.date_of_birth.status
+        this.formStatus.individual.residentialAddress = individualFields.residential_address.status
+        this.formStatus.individual.zipCode = individualFields.zip_code.status
+        this.formStatus.individual.country = individualFields.country.status
+        this.formStatus.individual.city = individualFields.city.status
+        this.formStatus.individual.nationality = individualFields.nationality.status
+        this.formStatus.individual.professionalActivity = individualFields.professional_activity.status
+        this.formStatus.individual.utilityBill = individualFields.utility_bill.status
+        this.status = res.data.status
         this.status = res.data.status
         this.videoConferenceDate = res.data.video_conference_date
       })
     },
+    //     id_card_front: {type: "id", description: "ID card front (side with MRZ)", possible_values: null, allow_extra: false, status: "EMPTY", …}
+    // id_card_back: {type: "id", description: "ID card back (side without MRZ)", possible_values: null, allow_extra: false, status: "EMPTY", …}
+    // firstname: {type: "string", description: "First name", possible_values: null, allow_extra: false, status: "EMPTY", …}
+    // lastname: {type: "string", description: "Last name", possible_values: null, allow_extra: false, status: "EMPTY", …}
+    // date_of_birth: {type: "date", description: "Date of birth", possible_values: null, allow_extra: false, status: "EMPTY", …}
+    // residential_address: {type: "string", description: "Residential address", possible_values: null, allow_extra: false, status: "EMPTY", …}
+    // zip_code: {type: "string", description: "Zip code", possible_values: null, allow_extra: false, status: "EMPTY", …}
+    // city: {type: "string", description: "City", possible_values: null, allow_extra: false, status: "EMPTY", …}
+    // country: {type: "string", description: "Country", possible_values: null, allow_extra: false, status: "EMPTY", …}
+    // nationality: {type: "string", description: "Nationality", possible_values: null, allow_extra: false, status: "EMPTY", …}
+    // professional_activity: {type: "string", description: "Professional activity", possible_values: null, allow_extra: false, status: "EMPTY", …}
+    // utility_bill: {type: "id
     save () {
       const { isEmpty, data } = this.$refs.signaturePad.saveSignature()
       console.log(isEmpty)
