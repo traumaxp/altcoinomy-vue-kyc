@@ -157,6 +157,8 @@
           icon="create_new_folder"
           :done="done3"
         >
+          {{formStatus.annex1}}
+          <q-separator />
           Name / Surname or Company name
           <q-input outlined />
           Date of birth or Date of incorporation
@@ -414,7 +416,8 @@ export default {
         nationality: '',
         professionalActivity: '',
         utilityBill: ''
-      }
+      },
+      annex1: ''
     },
     register_as: '',
     videoConferenceDate: '',
@@ -476,7 +479,7 @@ export default {
         }
       }).then(res => {
         let individualFields = res.data.groups.individual.fields
-        console.log(individualFields.id_card_front.status)
+        console.log(res.data.groups.annexes.fields.annex1.status)
         this.formStatus.subscribeAs = res.data.groups.basics.fields.subscribed_as.status
         this.formStatus.individual.IdCardFront = individualFields.id_card_front.status
         this.formStatus.individual.IdCardBack = individualFields.id_card_back.status
@@ -490,23 +493,12 @@ export default {
         this.formStatus.individual.nationality = individualFields.nationality.status
         this.formStatus.individual.professionalActivity = individualFields.professional_activity.status
         this.formStatus.individual.utilityBill = individualFields.utility_bill.status
+        this.formStatus.annex1 = res.data.groups.annexes.fields.annex1.status
         this.status = res.data.status
         this.status = res.data.status
         this.videoConferenceDate = res.data.video_conference_date
       })
     },
-    //     id_card_front: {type: "id", description: "ID card front (side with MRZ)", possible_values: null, allow_extra: false, status: "EMPTY", …}
-    // id_card_back: {type: "id", description: "ID card back (side without MRZ)", possible_values: null, allow_extra: false, status: "EMPTY", …}
-    // firstname: {type: "string", description: "First name", possible_values: null, allow_extra: false, status: "EMPTY", …}
-    // lastname: {type: "string", description: "Last name", possible_values: null, allow_extra: false, status: "EMPTY", …}
-    // date_of_birth: {type: "date", description: "Date of birth", possible_values: null, allow_extra: false, status: "EMPTY", …}
-    // residential_address: {type: "string", description: "Residential address", possible_values: null, allow_extra: false, status: "EMPTY", …}
-    // zip_code: {type: "string", description: "Zip code", possible_values: null, allow_extra: false, status: "EMPTY", …}
-    // city: {type: "string", description: "City", possible_values: null, allow_extra: false, status: "EMPTY", …}
-    // country: {type: "string", description: "Country", possible_values: null, allow_extra: false, status: "EMPTY", …}
-    // nationality: {type: "string", description: "Nationality", possible_values: null, allow_extra: false, status: "EMPTY", …}
-    // professional_activity: {type: "string", description: "Professional activity", possible_values: null, allow_extra: false, status: "EMPTY", …}
-    // utility_bill: {type: "id
     save () {
       const { isEmpty, data } = this.$refs.signaturePad.saveSignature()
       console.log(isEmpty)
