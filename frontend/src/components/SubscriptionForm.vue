@@ -313,9 +313,28 @@
           icon="add_comment"
           :done="done5"
         >
-          Try out different ad text to see what brings in the most customers, and learn how to
-          enhance your ads using features like ad extensions. If you run into any problems with
-          your ads, find out how to tell if they're running and how to resolve approval issues.
+          Origin of the crypto funds
+          <q-select
+            :options="originCryptoFundChoice1"
+            v-model="originCryptoFundData1"
+            outlined
+          />
+          Origin of the crypto funds
+          <q-select
+            :options="originCryptoFundChoice2"
+            v-model="originCryptoFundData2"
+            outlined
+          />
+          Address
+          <q-input outlined />
+          Nationality
+          <q-select
+            outlined
+            v-model="model"
+            :options="country"
+          />
+          Current Location
+          <q-input outlined />
 
           <q-stepper-navigation>
             <q-btn
@@ -401,6 +420,8 @@ Vue.use(VueSignaturePad)
 export default {
   name: 'SubscriptionForm',
   data: () => ({
+    originCryptoFundData1: '',
+    originCryptoFundData2: '',
     formStatus: {
       subscribeAs: '',
       individual: {
@@ -423,6 +444,12 @@ export default {
     videoConferenceDate: '',
     status: '',
     step: 1,
+    originCryptoFundChoice1: [
+      'Exchange', 'Otc', 'Mined', 'Other'
+    ],
+    originCryptoFundChoice2: [
+      `I'm a trader`, `I'm an early adopter`, `I'm an ico investor`, `I'm a miner`, `Goods and services`
+    ],
     done1: false,
     done2: false,
     done3: false,
@@ -479,7 +506,7 @@ export default {
         }
       }).then(res => {
         let individualFields = res.data.groups.individual.fields
-        console.log(res.data.groups.annexes.fields.annex1.status)
+        console.log(res.data.groups)
         this.formStatus.subscribeAs = res.data.groups.basics.fields.subscribed_as.status
         this.formStatus.individual.IdCardFront = individualFields.id_card_front.status
         this.formStatus.individual.IdCardBack = individualFields.id_card_back.status
