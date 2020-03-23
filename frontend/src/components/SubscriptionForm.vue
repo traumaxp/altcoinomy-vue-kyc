@@ -50,6 +50,7 @@
             :options="options"
             label="Select"
           />
+          {{formStatus.subscribeAs}}
           {{register_as}}
 
           <q-stepper-navigation>
@@ -401,6 +402,9 @@ Vue.use(VueSignaturePad)
 export default {
   name: 'SubscriptionForm',
   data: () => ({
+    formStatus: {
+      subscribeAs: ''
+    },
     register_as: '',
     videoConferenceDate: '',
     status: '',
@@ -460,8 +464,9 @@ export default {
           'Authorization': `Bearer ${this.$store.state.token}`
         }
       }).then(res => {
-        console.log(res.data)
+        console.log(res.data.groups.basics.fields.subscribed_as.status)
         console.log(res.data.groups.basics.fields)
+        this.formStatus.subscribeAs = res.data.groups.basics.fields.subscribed_as.status
         this.status = res.data.status
         this.videoConferenceDate = res.data.video_conference_date
       })
