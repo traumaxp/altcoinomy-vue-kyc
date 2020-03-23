@@ -16,7 +16,9 @@
 Demo project is a revolution, it will change the world.
 <div class="float-right">
   Status of your subscription: {{status}}
-  <q-btn @click="subscriptionStatus"></q-btn>
+  <div v-if="videoConferenceDate !== null">
+  Video conference date: {{videoConferenceDate}}
+    </div>
 </div>
 </div>
     <q-stepper
@@ -247,7 +249,8 @@ Vue.use(VueSignaturePad)
 export default {
   name: 'SubscriptionForm',
   data: () => ({
-    status: 'waiting for Altco review',
+    videoConferenceDate: '',
+    status: '',
     step: 1,
     done1: false,
     done2: false,
@@ -265,19 +268,24 @@ export default {
     ]
 
   }),
+  created () {
+    this.subscriptionStatus()
+  },
   methods: {
     undo () {
       this.$refs.signaturePad.undoSignature()
     },
     subscriptionStatus () {
       console.log(this.$route.params.id)
-      return axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/fill-status`, {
+      axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/fill-status`, {
         method: 'get',
         headers: {
           'Authorization': `Bearer ${this.$store.state.token}`
         }
       }).then(res => {
-        console.log(res)
+        console.log(res.data)
+        this.status = res.data.status
+        this.videoConferenceDate = res.data.video_conference_date
       })
     },
     save () {

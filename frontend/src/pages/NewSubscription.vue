@@ -71,7 +71,7 @@ export default {
       })
     },
     redirection (subscriptionId) {
-      console.log('redirect', subscriptionId)
+      console.log('redirection ', subscriptionId)
       this.$router.push({ name: 'SubscriptionFill', params: { id: subscriptionId } })
     }
   },
