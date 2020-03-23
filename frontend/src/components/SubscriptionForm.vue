@@ -54,11 +54,10 @@
 
           <q-stepper-navigation>
             <q-btn
-              @click="this.patchSubscription, () => { done1 = true; step = 2 }"
+              @click="patchSubscription(done1)"
               color="primary"
               label="Continue"
             />
-            <q-btn @click="patchSubscription"></q-btn>
           </q-stepper-navigation>
         </q-step>
 
@@ -429,7 +428,9 @@ export default {
     undo () {
       this.$refs.signaturePad.undoSignature()
     },
-    patchSubscription () {
+    patchSubscription (value) {
+      this.value = true
+      this.step = 2
       axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}`, {
         method: 'patch',
         data: {
