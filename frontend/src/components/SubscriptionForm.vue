@@ -387,10 +387,24 @@
           icon="add_comment"
           :done="done7"
         >
-          Try out different ad text to see what brings in the most customers, and learn how to
-          enhance your ads using features like ad extensions. If you run into any problems with
-          your ads, find out how to tell if they're running and how to resolve approval issues.
+          <div class="q-gutter-sm">
+            <q-badge color="teal">
+              Model: {{ modelDate }}
+            </q-badge>
+          </div>
 
+          <div class="q-gutter-md row items-start">
+            <q-date
+              v-model="modelDate"
+              mask="YYYY-MM-DD HH:mm"
+              color="purple"
+            />
+            <q-time
+              v-model="modelDate"
+              mask="YYYY-MM-DD HH:mm"
+              color="purple"
+            />
+          </div>
           <q-stepper-navigation>
             <q-btn
               color="primary"
@@ -425,6 +439,7 @@ Vue.use(VueSignaturePad)
 export default {
   name: 'SubscriptionForm',
   data: () => ({
+    modelDate: '2019-02-22 21:02',
     originCryptoFundData1: '',
     originCryptoFundData2: '',
     formStatus: {
