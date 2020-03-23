@@ -15,7 +15,8 @@
       <div class="text-body1 q-pa-md">
 Demo project is a revolution, it will change the world.
 <div class="float-right">
-  Status of your subscription: Subscription pending
+  Status of your subscription: {{status}}
+  <q-btn @click="subscriptionStatus"></q-btn>
 </div>
 </div>
     <q-stepper
@@ -238,6 +239,7 @@ Sit amet purus gravida quis blandit turpis cursus. In fermentum et sollicitudin 
   </q-card>
 </template>
 <script>
+import axios from 'axios'
 import Vue from 'vue'
 import VueSignaturePad from 'vue-signature-pad'
 Vue.use(VueSignaturePad)
@@ -245,6 +247,7 @@ Vue.use(VueSignaturePad)
 export default {
   name: 'SubscriptionForm',
   data: () => ({
+    status: 'waiting for Altco review',
     step: 1,
     done1: false,
     done2: false,
@@ -265,6 +268,17 @@ export default {
   methods: {
     undo () {
       this.$refs.signaturePad.undoSignature()
+    },
+    subscriptionStatus () {
+      console.log(this.$route.params.id)
+      return axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/fill-status`, {
+        method: 'get',
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.token}`
+        }
+      }).then(res => {
+        console.log(res)
+      })
     },
     save () {
       const { isEmpty, data } = this.$refs.signaturePad.saveSignature()

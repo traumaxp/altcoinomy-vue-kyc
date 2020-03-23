@@ -66,13 +66,13 @@ export default {
           register_as: this.registerAs
         }
       }).then(res => {
-        console.log(res)
+        console.log(res.data.id)
+        this.redirection(res.data.id)
       })
     },
-    redirection (icoId) {
-      console.log('redirect', icoId)
-      this.newSubscription(icoId)
-      this.$router.push({ name: 'SubscriptionFill', params: { id: icoId } })
+    redirection (subscriptionId) {
+      console.log('redirect', subscriptionId)
+      this.$router.push({ name: 'SubscriptionFill', params: { id: subscriptionId } })
     }
   },
   created () {
