@@ -66,7 +66,7 @@ export default {
           register_as: this.registerAs
         }
       }).then(res => {
-        console.log(res.data.id)
+        console.log(res.data)
         this.redirection(res.data.id)
       })
     },

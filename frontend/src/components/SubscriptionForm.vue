@@ -39,7 +39,8 @@ Demo project is a revolution, it will change the world.
         <q-select outlined v-model="model" :options="options" label="Select" />
 
         <q-stepper-navigation>
-          <q-btn @click="() => { done1 = true; step = 2 }" color="primary" label="Continue" />
+          <q-btn @click="this.patchSubscription, () => { done1 = true; step = 2 }" color="primary" label="Continue" />
+          <q-btn @click="patchSubscription"></q-btn>
         </q-stepper-navigation>
       </q-step>
 
@@ -269,13 +270,35 @@ export default {
 
   }),
   created () {
-    this.subscriptionStatus()
+    this.subscriptionData()
   },
   methods: {
     undo () {
       this.$refs.signaturePad.undoSignature()
     },
-    subscriptionStatus () {
+    patchSubscription () {
+      axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}`, {
+        method: 'patch',
+        data: {
+          'subscription_id': `5e78807c9f18333d07013114`,
+          'groups': {
+            'basics': {
+              'fields': {
+                'subscribed_as': {
+                  'value': 'individual'
+                }
+              }
+            }
+          }
+        },
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.token}`
+        }
+      }).then(res => {
+        console.log(res.data)
+      })
+    },
+    subscriptionData () {
       console.log(this.$route.params.id)
       axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/fill-status`, {
         method: 'get',
@@ -284,6 +307,7 @@ export default {
         }
       }).then(res => {
         console.log(res.data)
+        console.log(res.data.groups.basics.fields)
         this.status = res.data.status
         this.videoConferenceDate = res.data.video_conference_date
       })
