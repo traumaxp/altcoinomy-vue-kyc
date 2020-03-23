@@ -429,8 +429,6 @@ export default {
       this.$refs.signaturePad.undoSignature()
     },
     patchSubscription (value) {
-      this.value = true
-      this.step = 2
       axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}`, {
         method: 'patch',
         data: {
@@ -450,6 +448,8 @@ export default {
         }
       }).then(res => {
         console.log(res.data)
+        this.value = true
+        this.step = 2
       })
     },
     subscriptionData () {
