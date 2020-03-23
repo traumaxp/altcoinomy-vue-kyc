@@ -325,16 +325,21 @@
             v-model="originCryptoFundData2"
             outlined
           />
-          Address
-          <q-input outlined />
-          Nationality
-          <q-select
+          First supporting document (if you have any other document to share with us)
+          <q-uploader
             outlined
-            v-model="model"
-            :options="country"
+            :label="formStatus.individual.utilityBill"
           />
-          Current Location
-          <q-input outlined />
+          Second supporting document (if you have any other document to share with us)
+          <q-uploader
+            outlined
+            :label="formStatus.individual.utilityBill"
+          />
+          Third supporting document (if you have any other document to share with us)
+          <q-uploader
+            outlined
+            :label="formStatus.individual.utilityBill"
+          />
 
           <q-stepper-navigation>
             <q-btn
