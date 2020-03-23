@@ -228,7 +228,7 @@
         </q-step>
 
         <q-step
-          :name="4"
+          :name="5"
           title="Contribution details"
           caption="Optional"
           icon="create_new_folder"
@@ -293,32 +293,6 @@
 
           <q-stepper-navigation>
             <q-btn
-              @click="() => { done4 = true; step = 5 }"
-              color="primary"
-              label="Continue"
-            />
-            <q-btn
-              flat
-              @click="step = 3"
-              color="primary"
-              label="Back"
-              class="q-ml-sm"
-            />
-          </q-stepper-navigation>
-        </q-step>
-
-        <q-step
-          :name="5"
-          title="Crypto corroboration"
-          icon="add_comment"
-          :done="done5"
-        >
-          Try out different ad text to see what brings in the most customers, and learn how to
-          enhance your ads using features like ad extensions. If you run into any problems with
-          your ads, find out how to tell if they're running and how to resolve approval issues.
-
-          <q-stepper-navigation>
-            <q-btn
               @click="() => { done5 = true; step = 6 }"
               color="primary"
               label="Continue"
@@ -332,11 +306,12 @@
             />
           </q-stepper-navigation>
         </q-step>
+
         <q-step
           :name="6"
-          title="Token delivery address"
+          title="Crypto corroboration"
           icon="add_comment"
-          :done="done6"
+          :done="done5"
         >
           Try out different ad text to see what brings in the most customers, and learn how to
           enhance your ads using features like ad extensions. If you run into any problems with
@@ -359,6 +334,31 @@
         </q-step>
         <q-step
           :name="7"
+          title="Token delivery address"
+          icon="add_comment"
+          :done="done6"
+        >
+          Try out different ad text to see what brings in the most customers, and learn how to
+          enhance your ads using features like ad extensions. If you run into any problems with
+          your ads, find out how to tell if they're running and how to resolve approval issues.
+
+          <q-stepper-navigation>
+            <q-btn
+              @click="() => { done7 = true; step = 8 }"
+              color="primary"
+              label="Continue"
+            />
+            <q-btn
+              flat
+              @click="step = 6"
+              color="primary"
+              label="Back"
+              class="q-ml-sm"
+            />
+          </q-stepper-navigation>
+        </q-step>
+        <q-step
+          :name="8"
           title="Video conference booking"
           icon="add_comment"
           :done="done7"
@@ -370,12 +370,12 @@
           <q-stepper-navigation>
             <q-btn
               color="primary"
-              @click="done7 = true"
+              @click="done8 = true"
               label="Finalize my KYC"
             />
             <q-btn
               flat
-              @click="step = 6"
+              @click="step = 7"
               color="primary"
               label="Back"
               class="q-ml-sm"
@@ -385,7 +385,7 @@
         <q-btn
           class="on-right"
           color="primary"
-          @click="done7 = true"
+          @click="done8 = true"
           label="Finalize my KYC"
         />
       </q-stepper>
