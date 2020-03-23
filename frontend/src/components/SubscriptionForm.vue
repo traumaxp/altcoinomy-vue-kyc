@@ -70,13 +70,13 @@
           :done="done2"
         >
           ID card front (side with MRZ)
-          <q-input
+          <q-uploader
             outlined
             label="FILLED (click to change)"
           />
 
           ID card back (side without MRZ)
-          <q-input
+          <q-uploader
             outlined
             label="FILLED (click to change)"
           />
@@ -132,7 +132,7 @@
           />
 
           Proof of Residence such as utility bill or bank statement (required if you plan to contribute more than CHF 15'000 equivalent).
-          <q-input
+          <q-uploader
             outlined
             label="FILLED (click to change)"
           />
@@ -196,6 +196,31 @@
             <q-btn
               flat
               @click="step = 2"
+              color="primary"
+              label="Back"
+              class="q-ml-sm"
+            />
+          </q-stepper-navigation>
+        </q-step>
+
+        <q-step
+          :name="4"
+          title="Demo Customizable Token Purchase Agreement for individuals (Extra document)"
+          caption="Optional"
+          icon="create_new_folder"
+          :done="done4"
+        >
+          <q-uploader />
+
+          <q-stepper-navigation>
+            <q-btn
+              @click="() => { done4 = true; step = 5 }"
+              color="primary"
+              label="Continue"
+            />
+            <q-btn
+              flat
+              @click="step = 3"
               color="primary"
               label="Back"
               class="q-ml-sm"
