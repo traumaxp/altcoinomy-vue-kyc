@@ -48,11 +48,8 @@
             outlined
             v-model="register_as"
             :options="options"
-            label="Select"
+            :label="formStatus.subscribeAs"
           />
-          {{formStatus.subscribeAs}}
-          {{register_as}}
-
           <q-stepper-navigation>
             <q-btn
               @click="patchSubscription(done1)"
@@ -465,7 +462,6 @@ export default {
         }
       }).then(res => {
         console.log(res.data.groups.basics.fields.subscribed_as.status)
-        console.log(res.data.groups.basics.fields)
         this.formStatus.subscribeAs = res.data.groups.basics.fields.subscribed_as.status
         this.status = res.data.status
         this.videoConferenceDate = res.data.video_conference_date
