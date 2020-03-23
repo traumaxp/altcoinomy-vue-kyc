@@ -36,7 +36,8 @@ Demo project is a revolution, it will change the world.
         :done="done1"
       >
         Is the investor a company or an individual *
-        <q-select outlined v-model="model" :options="options" label="Select" />
+        <q-select outlined v-model="register_as" :options="options" label="Select" />
+        {{register_as}}
 
         <q-stepper-navigation>
           <q-btn @click="this.patchSubscription, () => { done1 = true; step = 2 }" color="primary" label="Continue" />
@@ -250,6 +251,7 @@ Vue.use(VueSignaturePad)
 export default {
   name: 'SubscriptionForm',
   data: () => ({
+    register_as: '',
     videoConferenceDate: '',
     status: '',
     step: 1,
@@ -262,7 +264,7 @@ export default {
     done7: false,
     model: null,
     options: [
-      'Company', 'Individual'
+      'company', 'individual'
     ],
     country: [
       'Switzerland', 'France'
@@ -280,12 +282,12 @@ export default {
       axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}`, {
         method: 'patch',
         data: {
-          'subscription_id': `5e78807c9f18333d07013114`,
+          'subscription_id': `${this.$route.params.id}`,
           'groups': {
             'basics': {
               'fields': {
                 'subscribed_as': {
-                  'value': 'individual'
+                  'value': this.register_as
                 }
               }
             }
