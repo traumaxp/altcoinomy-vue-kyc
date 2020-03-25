@@ -616,6 +616,7 @@ export default {
         }
       }).then(res => {
         console.log(res.data)
+        this.value = true
         this.step = 4
       })
     },
