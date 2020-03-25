@@ -33,6 +33,13 @@ export default new Vuex.Store({
       state.token = token
       state.user = user
     },
+    auth_error (state) {
+      state.status = 'error'
+    },
+    logout (state) {
+      state.status = ''
+      state.token = ''
+    },
     createSession (state, session) {
       // state.token = session.token
       state = session
@@ -44,6 +51,14 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    logout ({ commit }) {
+      return new Promise((resolve, reject) => {
+        commit('logout')
+        localStorage.removeItem('token')
+        delete axios.defaults.headers.common['Authorization']
+        resolve()
+      })
+    },
     login ({ commit }, user) {
       return new Promise((resolve, reject) => {
         commit('auth_request')
