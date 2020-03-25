@@ -193,7 +193,7 @@
 
           <q-stepper-navigation>
             <q-btn
-              @click="() => { done3 = true; step = 4 }"
+              @click="patchAnnex1(done3)"
               color="primary"
               label="Continue"
             />
@@ -597,6 +597,26 @@ export default {
         this.utilityBill = ''
         this.value = true
         this.step = 3
+      })
+    },
+    patchAnnex1 (value) {
+      axios(` https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/annex1`, {
+        method: 'post',
+        data: {
+          'name': 'John Doe',
+          'date_of_birth': '1982-07-13',
+          'nationality': 'FR',
+          'address': 'Roadthing 10th, 4765 There',
+          'sign':
+            'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53M[...]]wYXRoPjwvc3ZnPg==',
+          'place': 'Here'
+        },
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.token}`
+        }
+      }).then(res => {
+        console.log(res.data)
+        this.step = 4
       })
     },
     subscriptionData () {
