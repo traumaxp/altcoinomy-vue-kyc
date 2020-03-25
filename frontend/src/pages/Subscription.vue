@@ -89,18 +89,6 @@ export default {
       console.log('create new subscription')
       console.log(id)
       this.$router.push({ name: 'NewSubscription' })
-      // axios({ url: 'https://api-staging.altcoinomy.com/api/v1/subscriptions',
-      //   ico: id,
-      //   headers: {
-      //     'Authorization': `Bearer ${this.$store.state.token}`
-      //   },
-      //   method: 'POST' })
-      //   .then(resp => {
-      //     console.log(resp)
-      //   })
-      //   .catch(err => {
-      //     console.log(err)
-      //   })
     }
   }
 }
