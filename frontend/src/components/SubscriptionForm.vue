@@ -7,6 +7,10 @@
     <div class="row q-pa-md">
       <div class="col">
         Subscription Edit
+        <q-btn
+          label="getPlanning"
+          @click="getPlanning"
+        ></q-btn>
       </div>
       <div class="col on-right">
         <q-btn
@@ -52,7 +56,7 @@
           />
           <q-stepper-navigation>
             <q-btn
-              @click="patchSubscription(done1)"
+              @click="patchMainDetails(done1)"
               color="primary"
               label="Continue"
             />
@@ -136,7 +140,7 @@
 
           <q-stepper-navigation>
             <q-btn
-              @click="() => { done2 = true; step = 3 }"
+              @click="patchPersonalDetails(done2)"
               color="primary"
               label="Continue"
             />
@@ -493,7 +497,41 @@ export default {
     undo () {
       this.$refs.signaturePad.undoSignature()
     },
-    patchSubscription (value) {
+    getPlanning () {
+      axios('http://api-staging.altcoinomy.com/api/v1/video-conference-planning/slots', {
+        method: 'get',
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.token}`
+        }
+      }).then(res => {
+        console.log(res.data)
+      })
+    },
+    patchPersonalDetails (value) {
+      axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}`, {
+        method: 'patch',
+        data: {
+          'subscription_id': `${this.$route.params.id}`,
+          'groups': {
+            'basics': {
+              'fields': {
+                'subscribed_as': {
+                  'value': this.register_as
+                }
+              }
+            }
+          }
+        },
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.token}`
+        }
+      }).then(res => {
+        console.log(res.data)
+        this.value = true
+        this.step = 3
+      })
+    },
+    patchMainDetails (value) {
       axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}`, {
         method: 'patch',
         data: {
