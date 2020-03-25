@@ -12,35 +12,11 @@
     />
 
     <q-input
-      class="fullname"
-      v-model="user.fullname"
-      label="Full Name"
-      hint="will never be shown to other users and must match your ID document"
-      :rules="[
-        val =>
-          (val && val.length > 0 && val.includes(' ')) ||
-          'Please type your name as it appears on your ID.'
-      ]"
-      required
-    />
-    <q-input
       v-model="user.email"
       label="Email"
       type="email"
       hint="will never be be revealed to other users nor third parties."
       :rules="[val => (val && val.length > 0) || 'Please type an email']"
-      required
-    />
-
-    <q-input
-      v-model="user.nickname"
-      label="Display Name"
-      debounce="200"
-      hint="This will be shown to other users"
-      :rules="[
-        val => (val && val.length > 0) || 'Please type a name',
-        val => !val.includes(' ') || 'Must be a single word'
-      ]"
       required
     />
 
@@ -69,8 +45,6 @@ export default {
     valid: false,
     user: {
       username: '',
-      fullname: '',
-      nickname: '',
       email: '',
       password: ''
     }
