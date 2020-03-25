@@ -28,9 +28,8 @@ export default new Vuex.Store({
     auth_request (state) {
       state.status = 'loading'
     },
-    auth_success (state, token, user) {
+    auth_success (state, user) {
       state.status = 'success'
-      state.token = token
       state.user = user
     },
     auth_error (state) {
@@ -51,6 +50,21 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    register ({ commit }, user) {
+      return new Promise((resolve, reject) => {
+        commit('auth_request')
+        axios({
+          url: 'https://api-staging.altcoinomy.com/api/v1/register', data: user, method: 'POST'
+        })
+          .then(resp => {
+            console.log(resp.data)
+            resolve(resp)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
     logout ({ commit }) {
       return new Promise((resolve, reject) => {
         commit('logout')

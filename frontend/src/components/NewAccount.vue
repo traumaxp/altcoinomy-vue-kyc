@@ -55,6 +55,14 @@ export default {
   methods: {
     register () {
       if (this.valid) {
+        let data = {
+          username: this.user.username,
+          email: this.user.email,
+          password: this.user.password
+        }
+        this.$store.dispatch('register', data)
+          .then(res => console.log(res.data))
+          .catch(err => console.log(err))
         const { User } = this.$FeathersVuex.api
         const user = new User(this.user)
         user
