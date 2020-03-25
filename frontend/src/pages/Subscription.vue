@@ -45,17 +45,7 @@
               <td class="text">subscription_pending</td>
               <td class="text">
                 <q-btn
-                  size="sm"
-                  label="edit"
-                ></q-btn>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-left">Demo</td>
-              <td class="text">03/10/2020</td>
-              <td class="text">subscription_pending</td>
-              <td class="text">
-                <q-btn
+                  @click="getAllSubscription"
                   size="sm"
                   label="edit"
                 ></q-btn>
@@ -70,7 +60,7 @@
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from 'axios'
 import SubscriptionForm from '../components/SubscriptionForm'
 export default {
   name: 'Subscription',
@@ -80,6 +70,16 @@ export default {
   data: () => ({
   }),
   methods: {
+    getAllSubscription () {
+      axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions`, {
+        method: 'get',
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.token}`
+        }
+      }).then(res => {
+        console.log(res.data)
+      })
+    },
     newSubscription (id) {
       console.log('create new subscription')
       console.log(id)
