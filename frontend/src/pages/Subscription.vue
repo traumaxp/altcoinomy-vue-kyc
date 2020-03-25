@@ -21,33 +21,29 @@
         <q-markup-table>
           <thead>
             <tr>
-              <th class="text-left">Project</th>
-              <th class="text">Date of subscription</th>
-              <th class="text">Status</th>
-              <th class="text">Actions</th>
+              <th class="text-left">Logo</th>
+              <th class="text-left">Date of subscription</th>
+              <th class="text-left">Status</th>
+              <th class="text-left">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="text-left">Demo</td>
-              <td class="text">03/10/2020</td>
-              <td class="text">subscription_submitted</td>
+            <tr
+              v-for="ico in icos"
+              :key="ico.id"
+            >
+              <td class="text-left">Demo Logo</td>
+              <td class="text">{{ico.date_of_subscription}}</td>
+              <div
+                style="height: 200px"
+                class="text"
+              >{{ico.status}}</div>
               <td class="text">
                 <q-btn
                   size="sm"
-                  label="edit"
-                ></q-btn>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-left">Demo</td>
-              <td class="text">03/10/2020</td>
-              <td class="text">subscription_pending</td>
-              <td class="text">
-                <q-btn
-                  @click="getAllSubscription"
-                  size="sm"
-                  label="edit"
+                  color="blue"
+                  @click="redirection(ico.id)"
+                  label="EDIT"
                 ></q-btn>
               </td>
             </tr>
@@ -68,17 +64,26 @@ export default {
     SubscriptionForm
   },
   data: () => ({
+    icos: []
   }),
+  beforeMount () {
+    axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions`, {
+      method: 'get',
+      headers: {
+        'Authorization': `Bearer ${this.$store.state.token}`
+      }
+    }).then(res => {
+      const array = Object.values(res.data)
+      console.log(array)
+      this.icos = array
+    }).catch(err => {
+      console.log(err)
+    })
+  },
   methods: {
-    getAllSubscription () {
-      axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions`, {
-        method: 'get',
-        headers: {
-          'Authorization': `Bearer ${this.$store.state.token}`
-        }
-      }).then(res => {
-        console.log(res.data)
-      })
+    redirection (subscriptionId) {
+      console.log('redirection ', subscriptionId)
+      this.$router.push({ name: 'SubscriptionFill', params: { id: subscriptionId } })
     },
     newSubscription (id) {
       console.log('create new subscription')
