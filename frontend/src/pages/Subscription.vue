@@ -34,10 +34,10 @@
             >
               <td class="text-left">Demo Logo</td>
               <td class="text">{{ico.date_of_subscription}}</td>
-              <div
+              <td
                 style="height: 200px"
-                class="text"
-              >{{ico.status}}</div>
+                class="text-left"
+              >{{ico.status}}</td>
               <td class="text">
                 <q-btn
                   size="sm"
