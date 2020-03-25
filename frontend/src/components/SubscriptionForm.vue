@@ -84,6 +84,7 @@
           First name
           <q-input
             outlined
+            v-model="firstname"
             :label="formStatus.individual.firstname"
           />
 
@@ -444,6 +445,8 @@ export default {
   name: 'SubscriptionForm',
   data: () => ({
     modelDate: '2019-02-22 21:02',
+    register_as: '',
+    firstname: '',
     originCryptoFundData1: '',
     originCryptoFundData2: '',
     formStatus: {
@@ -464,7 +467,6 @@ export default {
       },
       annex1: ''
     },
-    register_as: '',
     videoConferenceDate: '',
     status: '',
     step: 1,
@@ -507,30 +509,6 @@ export default {
         console.log(res.data)
       })
     },
-    patchPersonalDetails (value) {
-      axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}`, {
-        method: 'patch',
-        data: {
-          'subscription_id': `${this.$route.params.id}`,
-          'groups': {
-            'basics': {
-              'fields': {
-                'subscribed_as': {
-                  'value': this.register_as
-                }
-              }
-            }
-          }
-        },
-        headers: {
-          'Authorization': `Bearer ${this.$store.state.token}`
-        }
-      }).then(res => {
-        console.log(res.data)
-        this.value = true
-        this.step = 3
-      })
-    },
     patchMainDetails (value) {
       axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}`, {
         method: 'patch',
@@ -553,6 +531,72 @@ export default {
         console.log(res.data)
         this.value = true
         this.step = 2
+      })
+    },
+    patchPersonalDetails (value) {
+      axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}`, {
+        method: 'patch',
+        data: {
+          'subscription_id': `${this.$route.params.id}`,
+          'groups': {
+            'individual': {
+              'fields': {
+                'id_card_front': {
+                  'value': ''
+                },
+                'id_card_back': {
+                  'value': ''
+                },
+                'firstname': {
+                  'value': this.firstname
+                },
+                'lastname': {
+                  'value': this.lastname
+                },
+                'date_of_birth': {
+                  'value': this.dateOfBirth
+                },
+                'residential_address': {
+                  'value': this.residentialAddress
+                },
+                'zip_code': {
+                  'value': this.zipCode
+                },
+                'country': {
+                  'value': this.country
+                },
+                'nationality': {
+                  'value': this.nationality
+                },
+                'professional_activity': {
+                  'value': this.professionalActivity
+                },
+                'utility_bill': {
+                  'value': this.utilityBill
+                }
+              }
+            }
+          }
+        },
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.token}`
+        }
+      }).then(res => {
+        console.log(res.data)
+        this.IdCardFront = ''
+        this.IdCardBack = ''
+        this.firstname = ''
+        this.lastname = ''
+        this.dateOfBirth = ''
+        this.residentialAddress = ''
+        this.zipCode = ''
+        this.city = ''
+        this.country = ''
+        this.nationality = ''
+        this.professionalActivity = ''
+        this.utilityBill = ''
+        this.value = true
+        this.step = 3
       })
     },
     subscriptionData () {
