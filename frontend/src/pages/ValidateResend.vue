@@ -29,7 +29,7 @@ import axios from 'axios'
 export default {
   name: 'ValidateResend',
   data: () => ({
-    email: '',
+    email: ''
   }),
   method: {
     reSendValidationCode () {
