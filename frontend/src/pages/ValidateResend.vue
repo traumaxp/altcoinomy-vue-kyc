@@ -8,11 +8,13 @@
           @click="$router.push({ name: 'validate' })"
         >Validate with current code</q-btn>
         <q-input
+          v-model="email"
           label="Email"
           type="email"
           outlined
         />
         <q-btn
+          @click="reSendVaidationCode"
           class="q-pa-md"
           label="Validate"
           color="primary"
@@ -23,8 +25,26 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  name: 'ValidateResend'
+  name: 'ValidateResend',
+  data: () => ({
+    email: '',
+  }),
+  method: {
+    reSendValidationCode () {
+      axios('http://api-staging.altcoinomy.com/api/v1/validate/resend', {
+        method: 'get',
+        data: {
+          'email': this.email,
+          'phone': 'string',
+          'confirm_by': 'email'
+        }
+      }).then(res => {
+        console.log(res.data)
+      })
+    }
+  }
 }
 </script>
 <style lang="sass" scoped>
