@@ -35,7 +35,7 @@ const routes = [
       },
       {
         path: '/validate',
-        name: 'validate',
+        name: 'Validate',
         component: () => import('pages/Validate.vue')
       },
       {
