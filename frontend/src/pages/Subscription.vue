@@ -12,7 +12,7 @@
         <div class="col on-right">
           <q-btn
             class="float-right"
-            @click="newSubscription('5e732f58908460164d3d310a')"
+            @click="newSubscription"
             label="New"
           ></q-btn>
         </div>
@@ -85,9 +85,8 @@ export default {
       console.log('redirection ', subscriptionId)
       this.$router.push({ name: 'SubscriptionFill', params: { id: subscriptionId } })
     },
-    newSubscription (id) {
-      console.log('create new subscription')
-      console.log(id)
+    newSubscription () {
+      console.log('Redrect to new subscription page')
       this.$router.push({ name: 'NewSubscription' })
     }
   }
