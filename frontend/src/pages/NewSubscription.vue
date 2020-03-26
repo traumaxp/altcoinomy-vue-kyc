@@ -109,16 +109,6 @@ export default {
     }
   },
   created () {
-    // axios('http://api-staging.altcoinomy.com/api/v1/video-conference-planning/slots', {
-    //   method: 'get',
-    //   headers: {
-    //     'Authorization': `Bearer ${this.store.state.token}`
-    //   }
-    // }).then(res => {
-    //   console.log(res.data)
-    // }).catch(err => {
-    //   console.log(err)
-    // })
     axios('https://api-staging.altcoinomy.com/api/v1/icos', {
       method: 'get',
       headers: {
