@@ -313,34 +313,6 @@ export default {
         console.log(res.data)
       })
     },
-    patchCryptoCorroboration (value) {
-      axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}`, {
-        method: 'patch',
-        data: {
-          'subscription_id': `${this.$route.params.id}`,
-          'groups': {
-            'crypto_tracing': {
-              'fields': {
-                'origin_of_funds': {
-                  'value': '7898'
-                }
-                // 'exchange_source': 'Binance',
-                // 'supporting_document1': '',
-                // 'supporting_document2': '',
-                // 'supporting_document3': ''
-              }
-            }
-          }
-        },
-        headers: {
-          'Authorization': `Bearer ${this.$store.state.token}`
-        }
-      }).then(res => {
-        console.log(res.data)
-        this.value = true
-        this.step = 6
-      })
-    },
     getListOfVideoConf () {
       axios(`https://api-staging.altcoinomy.com/api/v1/video-conference-planning/slots`, {
         method: 'GET',

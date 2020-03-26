@@ -78,7 +78,7 @@
 
     <q-stepper-navigation>
       <q-btn
-        @click="patchPersonalDetails(done2)"
+        @click="patchPersonalDetails()"
         color="primary"
         label="Continue"
       />
@@ -96,6 +96,18 @@
 import axios from 'axios'
 export default {
   data: () => ({
+    IdCardFront: '',
+    IdCardBack: '',
+    firstname: '',
+    lastname: '',
+    dateOfBirth: '',
+    residentialAddress: '',
+    zipCode: '',
+    city: '',
+    country: '',
+    nationality: '',
+    professionalActivity: '',
+    utilityBill: '',
     formStatus: {
       individual: {
         IdCardFront: '',
@@ -134,17 +146,23 @@ export default {
       //   }
       // })
     },
-    patchAnnex1 (value) {
-      axios(` https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/annex1`, {
-        method: 'post',
+    patchPersonalDetails () {
+      axios(` https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}`, {
+        method: 'patch',
         data: {
-          'name': 'John Doe',
-          'date_of_birth': '1982-07-13',
-          'nationality': 'FR',
-          'address': 'Roadthing 10th, 4765 There',
-          'sign':
-            'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53M[...]]wYXRoPjwvc3ZnPg==',
-          'place': 'Here'
+          'subscription_id': `${this.$route.params.id}`,
+          'groups': {
+            'individual': {
+              'fields': {
+                'firstname': {
+                  'value': 'John'
+                },
+                'lastname': {
+                  'value': 'Doe'
+                }
+              }
+            }
+          }
         },
         headers: {
           'Authorization': `Bearer ${this.$store.state.token}`
