@@ -66,49 +66,7 @@
           icon="create_new_folder"
           :done="done3"
         >
-          {{formStatus.annex1}}
-          <q-separator />
-          Name / Surname or Company name
-          <q-input outlined />
-          Date of birth or Date of incorporation
-          <q-input outlined />
-          Address
-          <q-input outlined />
-          Nationality
-          <q-select
-            outlined
-            v-model="model"
-            :options="country"
-          />
-          Current Location
-          <q-input outlined />
-          Signature of the counterparty <br>
-          <div id="app">
-            <VueSignaturePad
-              width="500px"
-              height="500px"
-              ref="signaturePad"
-            />
-            <div>
-              <button @click="save">Save</button>
-              <button @click="undo">Undo</button>
-            </div>
-          </div>
-
-          <q-stepper-navigation>
-            <q-btn
-              @click="patchAnnex1(done3)"
-              color="primary"
-              label="Continue"
-            />
-            <q-btn
-              flat
-              @click="step = 2"
-              color="primary"
-              label="Back"
-              class="q-ml-sm"
-            />
-          </q-stepper-navigation>
+          <Annex1 />
         </q-step>
 
         <q-step
@@ -222,48 +180,7 @@
           icon="add_comment"
           :done="done5"
         >
-          Origin of the crypto funds
-          <q-select
-            :options="originCryptoFundChoice1"
-            v-model="originCryptoFundData1"
-            outlined
-          />
-          Origin of the crypto funds
-          <q-select
-            :options="originCryptoFundChoice2"
-            v-model="originCryptoFundData2"
-            outlined
-          />
-          First supporting document (if you have any other document to share with us)
-          <q-uploader
-            outlined
-            :label="formStatus.individual.utilityBill"
-          />
-          Second supporting document (if you have any other document to share with us)
-          <q-uploader
-            outlined
-            :label="formStatus.individual.utilityBill"
-          />
-          Third supporting document (if you have any other document to share with us)
-          <q-uploader
-            outlined
-            :label="formStatus.individual.utilityBill"
-          />
-
-          <q-stepper-navigation>
-            <q-btn
-              @click="patchCryptoCorroboration(done6)"
-              color="primary"
-              label="Continue"
-            />
-            <q-btn
-              flat
-              @click="step = 5"
-              color="primary"
-              label="Back"
-              class="q-ml-sm"
-            />
-          </q-stepper-navigation>
+          <CryptoCorroboration />
         </q-step>
         <q-step
           :name="7"
@@ -339,6 +256,8 @@
 <script>
 import MainDetails from './MainDetails'
 import PersonalDetails from './PersonalDetails'
+import Annex1 from './Annex1'
+import CryptoCorroboration from './CryptoCorroboration'
 import axios from 'axios'
 import Vue from 'vue'
 import VueSignaturePad from 'vue-signature-pad'
@@ -351,23 +270,6 @@ export default {
     firstname: '',
     originCryptoFundData1: '',
     originCryptoFundData2: '',
-    formStatus: {
-      individual: {
-        IdCardFront: '',
-        IdCardBack: '',
-        firstname: '',
-        lastname: '',
-        dateOfBirth: '',
-        residentialAddress: '',
-        zipCode: '',
-        city: '',
-        country: '',
-        nationality: '',
-        professionalActivity: '',
-        utilityBill: ''
-      },
-      annex1: ''
-    },
     videoConferenceDate: '',
     status: '',
     step: 1,
@@ -393,10 +295,9 @@ export default {
   }),
   components: {
     MainDetails,
-    PersonalDetails
-  },
-  created () {
-    this.subscriptionData()
+    PersonalDetails,
+    Annex1,
+    CryptoCorroboration
   },
   methods: {
     undo () {
@@ -410,27 +311,6 @@ export default {
         }
       }).then(res => {
         console.log(res.data)
-      })
-    },
-    patchAnnex1 (value) {
-      axios(` https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/annex1`, {
-        method: 'post',
-        data: {
-          'name': 'John Doe',
-          'date_of_birth': '1982-07-13',
-          'nationality': 'FR',
-          'address': 'Roadthing 10th, 4765 There',
-          'sign':
-            'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53M[...]]wYXRoPjwvc3ZnPg==',
-          'place': 'Here'
-        },
-        headers: {
-          'Authorization': `Bearer ${this.$store.state.token}`
-        }
-      }).then(res => {
-        console.log(res.data)
-        this.value = true
-        this.step = 4
       })
     },
     patchCryptoCorroboration (value) {
@@ -471,37 +351,6 @@ export default {
       }).then(res => {
         console.log(res.data)
       })
-    },
-    subscriptionData () {
-      console.log(this.$route.params.id)
-      if (this.$route.params.id !== undefined) {
-        axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/fill-status`, {
-          method: 'get',
-          headers: {
-            'Authorization': `Bearer ${this.$store.state.token}`
-          }
-        }).then(res => {
-          let individualFields = res.data.groups.individual.fields
-          console.log(res.data.groups)
-          this.formStatus.subscribeAs = res.data.groups.basics.fields.subscribed_as.status
-          this.formStatus.individual.IdCardFront = individualFields.id_card_front.status
-          this.formStatus.individual.IdCardBack = individualFields.id_card_back.status
-          this.formStatus.individual.firstname = individualFields.firstname.status
-          this.formStatus.individual.lastname = individualFields.lastname.status
-          this.formStatus.individual.dateOfBirth = individualFields.date_of_birth.status
-          this.formStatus.individual.residentialAddress = individualFields.residential_address.status
-          this.formStatus.individual.zipCode = individualFields.zip_code.status
-          this.formStatus.individual.country = individualFields.country.status
-          this.formStatus.individual.city = individualFields.city.status
-          this.formStatus.individual.nationality = individualFields.nationality.status
-          this.formStatus.individual.professionalActivity = individualFields.professional_activity.status
-          this.formStatus.individual.utilityBill = individualFields.utility_bill.status
-          this.formStatus.annex1 = res.data.groups.annexes.fields.annex1.status
-          this.status = res.data.status
-          this.status = res.data.status
-          this.videoConferenceDate = res.data.video_conference_date
-        })
-      }
     },
     save () {
       const { isEmpty, data } = this.$refs.signaturePad.saveSignature()
