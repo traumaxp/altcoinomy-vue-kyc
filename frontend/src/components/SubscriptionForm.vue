@@ -47,20 +47,7 @@
           icon="settings"
           :done="done1"
         >
-          Is the investor a company or an individual *
-          <q-select
-            outlined
-            v-model="register_as"
-            :options="options"
-            :label="formStatus.subscribeAs"
-          />
-          <q-stepper-navigation>
-            <q-btn
-              @click="patchMainDetails(done1)"
-              color="primary"
-              label="Continue"
-            />
-          </q-stepper-navigation>
+          <MainDetails />
         </q-step>
 
         <q-step
@@ -70,91 +57,8 @@
           icon="create_new_folder"
           :done="done2"
         >
-          ID card front (side with MRZ)
-          <q-uploader
-            outlined
-            :label="formStatus.individual.IdCardFront"
-          />
-
-          ID card back (side without MRZ)
-          <q-uploader
-            outlined
-            :label="formStatus.individual.IdCardBack"
-          />
-          First name
-          <q-input
-            outlined
-            v-model="firstname"
-            :label="formStatus.individual.firstname"
-          />
-
-          Last name
-          <q-input
-            outlined
-            :label="formStatus.individual.lastname"
-          />
-
-          Date of birth
-          <q-input
-            outlined
-            :label="formStatus.individual.dateOfBirth"
-          />
-
-          Residential address
-          <q-input
-            outlined
-            :label="formStatus.individual.residentialAddress"
-          />
-          Zip code
-          <q-input
-            outlined
-            :label="formStatus.individual.zipCode"
-          />
-          City
-          <q-input
-            outlined
-            :label="formStatus.individual.city"
-          />
-          Country
-          <q-input
-            outlined
-            :label="formStatus.individual.country"
-          />
-
-          Nationality
-          <q-input
-            outlined
-            :label="formStatus.individual.nationality"
-          />
-
-          Professional activity
-          <q-input
-            outlined
-            :label="formStatus.individual.professionalActivity"
-          />
-
-          Proof of Residence such as utility bill or bank statement (required if you plan to contribute more than CHF 15'000 equivalent).
-          <q-uploader
-            outlined
-            :label="formStatus.individual.utilityBill"
-          />
-
-          <q-stepper-navigation>
-            <q-btn
-              @click="patchPersonalDetails(done2)"
-              color="primary"
-              label="Continue"
-            />
-            <q-btn
-              flat
-              @click="step = 1"
-              color="primary"
-              label="Back"
-              class="q-ml-sm"
-            />
-          </q-stepper-navigation>
+          <PersonalDetails />
         </q-step>
-
         <q-step
           :name="3"
           title="Annex 1 - Identification of the beneficial owner sheet"
@@ -433,6 +337,8 @@
   </q-card>
 </template>
 <script>
+import MainDetails from './MainDetails'
+import PersonalDetails from './PersonalDetails'
 import axios from 'axios'
 import Vue from 'vue'
 import VueSignaturePad from 'vue-signature-pad'
@@ -442,12 +348,10 @@ export default {
   name: 'SubscriptionForm',
   data: () => ({
     modelDate: '2019-02-22 21:02',
-    register_as: '',
     firstname: '',
     originCryptoFundData1: '',
     originCryptoFundData2: '',
     formStatus: {
-      subscribeAs: '',
       individual: {
         IdCardFront: '',
         IdCardBack: '',
@@ -481,14 +385,16 @@ export default {
     done6: false,
     done7: false,
     model: null,
-    options: [
-      'company', 'individual'
-    ],
     country: [
       'Switzerland', 'France'
-    ]
-
+    ],
+    selected_file: '',
+    check_if_document_upload: false
   }),
+  components: {
+    MainDetails,
+    PersonalDetails
+  },
   created () {
     this.subscriptionData()
   },
@@ -504,96 +410,6 @@ export default {
         }
       }).then(res => {
         console.log(res.data)
-      })
-    },
-    patchMainDetails (value) {
-      axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}`, {
-        method: 'patch',
-        data: {
-          'subscription_id': `${this.$route.params.id}`,
-          'groups': {
-            'basics': {
-              'fields': {
-                'subscribed_as': {
-                  'value': this.register_as
-                }
-              }
-            }
-          }
-        },
-        headers: {
-          'Authorization': `Bearer ${this.$store.state.token}`
-        }
-      }).then(res => {
-        console.log(res.data)
-        this.value = true
-        this.step = 2
-      })
-    },
-    patchPersonalDetails (value) {
-      axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}`, {
-        method: 'patch',
-        data: {
-          'subscription_id': `${this.$route.params.id}`,
-          'groups': {
-            'individual': {
-              'fields': {
-                'id_card_front': {
-                  'value': ''
-                },
-                'id_card_back': {
-                  'value': ''
-                },
-                'firstname': {
-                  'value': this.firstname
-                },
-                'lastname': {
-                  'value': this.lastname
-                },
-                'date_of_birth': {
-                  'value': this.dateOfBirth
-                },
-                'residential_address': {
-                  'value': this.residentialAddress
-                },
-                'zip_code': {
-                  'value': this.zipCode
-                },
-                'country': {
-                  'value': this.country
-                },
-                'nationality': {
-                  'value': this.nationality
-                },
-                'professional_activity': {
-                  'value': this.professionalActivity
-                },
-                'utility_bill': {
-                  'value': this.utilityBill
-                }
-              }
-            }
-          }
-        },
-        headers: {
-          'Authorization': `Bearer ${this.$store.state.token}`
-        }
-      }).then(res => {
-        console.log(res.data)
-        this.IdCardFront = ''
-        this.IdCardBack = ''
-        this.firstname = ''
-        this.lastname = ''
-        this.dateOfBirth = ''
-        this.residentialAddress = ''
-        this.zipCode = ''
-        this.city = ''
-        this.country = ''
-        this.nationality = ''
-        this.professionalActivity = ''
-        this.utilityBill = ''
-        this.value = true
-        this.step = 3
       })
     },
     patchAnnex1 (value) {
