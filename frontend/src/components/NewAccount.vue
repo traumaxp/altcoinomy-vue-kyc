@@ -55,10 +55,19 @@ export default {
   methods: {
     register () {
       if (this.valid) {
-        let data = {
-          username: this.user.username,
-          email: this.user.email,
-          password: this.user.password
+        let data =
+        {
+          'username': this.user.username,
+          'email': this.user.email,
+          'telephone': 'string',
+          'plain_password': this.user.password,
+          'referal': 'string',
+          'confirm_by': 'email',
+          'accredited_investor': true,
+          'authorize_contact': true,
+          'chip': 'string',
+          'starts_with_icos': 'string',
+          'starts_with_organizer': 'string'
         }
         this.$store.dispatch('register', data)
           .then(res => console.log(res.data))

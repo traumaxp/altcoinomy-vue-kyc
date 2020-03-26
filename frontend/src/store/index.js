@@ -54,13 +54,20 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         commit('auth_request')
         axios({
-          url: 'https://api-staging.altcoinomy.com/api/v1/register', data: user, method: 'POST'
+          url: 'https://api-staging.altcoinomy.com/api/v1/register',
+          data: user,
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: 'POST'
         })
           .then(resp => {
             console.log(resp.data)
             resolve(resp)
           })
           .catch(err => {
+            console.log(err)
             reject(err)
           })
       })
