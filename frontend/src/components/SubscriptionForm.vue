@@ -622,32 +622,34 @@ export default {
     },
     subscriptionData () {
       console.log(this.$route.params.id)
-      axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/fill-status`, {
-        method: 'get',
-        headers: {
-          'Authorization': `Bearer ${this.$store.state.token}`
-        }
-      }).then(res => {
-        let individualFields = res.data.groups.individual.fields
-        console.log(res.data.groups)
-        this.formStatus.subscribeAs = res.data.groups.basics.fields.subscribed_as.status
-        this.formStatus.individual.IdCardFront = individualFields.id_card_front.status
-        this.formStatus.individual.IdCardBack = individualFields.id_card_back.status
-        this.formStatus.individual.firstname = individualFields.firstname.status
-        this.formStatus.individual.lastname = individualFields.lastname.status
-        this.formStatus.individual.dateOfBirth = individualFields.date_of_birth.status
-        this.formStatus.individual.residentialAddress = individualFields.residential_address.status
-        this.formStatus.individual.zipCode = individualFields.zip_code.status
-        this.formStatus.individual.country = individualFields.country.status
-        this.formStatus.individual.city = individualFields.city.status
-        this.formStatus.individual.nationality = individualFields.nationality.status
-        this.formStatus.individual.professionalActivity = individualFields.professional_activity.status
-        this.formStatus.individual.utilityBill = individualFields.utility_bill.status
-        this.formStatus.annex1 = res.data.groups.annexes.fields.annex1.status
-        this.status = res.data.status
-        this.status = res.data.status
-        this.videoConferenceDate = res.data.video_conference_date
-      })
+      if (this.$route.params.id !== undefined) {
+        axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/fill-status`, {
+          method: 'get',
+          headers: {
+            'Authorization': `Bearer ${this.$store.state.token}`
+          }
+        }).then(res => {
+          let individualFields = res.data.groups.individual.fields
+          console.log(res.data.groups)
+          this.formStatus.subscribeAs = res.data.groups.basics.fields.subscribed_as.status
+          this.formStatus.individual.IdCardFront = individualFields.id_card_front.status
+          this.formStatus.individual.IdCardBack = individualFields.id_card_back.status
+          this.formStatus.individual.firstname = individualFields.firstname.status
+          this.formStatus.individual.lastname = individualFields.lastname.status
+          this.formStatus.individual.dateOfBirth = individualFields.date_of_birth.status
+          this.formStatus.individual.residentialAddress = individualFields.residential_address.status
+          this.formStatus.individual.zipCode = individualFields.zip_code.status
+          this.formStatus.individual.country = individualFields.country.status
+          this.formStatus.individual.city = individualFields.city.status
+          this.formStatus.individual.nationality = individualFields.nationality.status
+          this.formStatus.individual.professionalActivity = individualFields.professional_activity.status
+          this.formStatus.individual.utilityBill = individualFields.utility_bill.status
+          this.formStatus.annex1 = res.data.groups.annexes.fields.annex1.status
+          this.status = res.data.status
+          this.status = res.data.status
+          this.videoConferenceDate = res.data.video_conference_date
+        })
+      }
     },
     save () {
       const { isEmpty, data } = this.$refs.signaturePad.saveSignature()
