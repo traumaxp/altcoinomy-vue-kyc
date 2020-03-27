@@ -85,9 +85,40 @@ export default {
       console.log(empty)
       this.signature = data
     },
-    patchAnnex1 () {
-      console.log('hello')
+    patchAnnex1 (value) {
+      axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}`, {
+        method: 'patch',
+        data: {
+          'subscription_id': `${this.$route.params.id}`,
+          'groups': {
+            'basics': {
+              'fields': {
+                'subscribed_as': {
+                  'value': this.register_as
+                }
+              }
+            }
+          }
+        },
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.token}`
+        }
+      }).then(res => {
+        console.log(res.data)
+        this.value = true
+        // this.step = 2
+      })
     },
+    // "name": "John Doe",
+    // 9 / 16GETTING-STARTED.md
+    // 15/11/2019
+    // "date_of_birth": "1982-07-13",
+    // "nationality": "FR",
+    // "address": "Roadthing 10th, 4765 There",
+    // "sign":
+    // "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53M[...]]wYXRoPjwvc3ZnPg==",
+    // "place": "Here"
+    // }
     uploadFile () {
       let fd = new FormData()
       fd.append('file', this.selected_file)
