@@ -80,7 +80,9 @@ export default {
       this.check_if_document_upload = true
     },
     save () {
-      console.log()
+      const data = this.$refs.signaturePad.saveSignature()
+      console.log(data)
+      this.signature = data
     },
     uploadFile () {
       let fd = new FormData()
@@ -97,72 +99,6 @@ export default {
     },
     undo () {
       this.$refs.signaturePad.undoSignature()
-    },
-    patchPersonalDetails (value) {
-      axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}`, {
-        method: 'patch',
-        data: {
-          'subscription_id': `${this.$route.params.id}`,
-          'groups': {
-            'individual': {
-              'fields': {
-                'id_card_front': {
-                  'value': ''
-                },
-                'id_card_back': {
-                  'value': ''
-                },
-                'firstname': {
-                  'value': this.firstname
-                },
-                'lastname': {
-                  'value': this.lastname
-                },
-                'date_of_birth': {
-                  'value': this.dateOfBirth
-                },
-                'residential_address': {
-                  'value': this.residentialAddress
-                },
-                'zip_code': {
-                  'value': this.zipCode
-                },
-                'country': {
-                  'value': this.country
-                },
-                'nationality': {
-                  'value': this.nationality
-                },
-                'professional_activity': {
-                  'value': this.professionalActivity
-                },
-                'utility_bill': {
-                  'value': this.utilityBill
-                }
-              }
-            }
-          }
-        },
-        headers: {
-          'Authorization': `Bearer ${this.$store.state.token}`
-        }
-      }).then(res => {
-        console.log(res.data)
-        this.IdCardFront = ''
-        this.IdCardBack = ''
-        this.firstname = ''
-        this.lastname = ''
-        this.dateOfBirth = ''
-        this.residentialAddress = ''
-        this.zipCode = ''
-        this.city = ''
-        this.country = ''
-        this.nationality = ''
-        this.professionalActivity = ''
-        this.utilityBill = ''
-        this.value = true
-        this.step = 3
-      })
     },
     subscriptionData () {
       console.log(this.$route.params.id)
