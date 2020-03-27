@@ -19,7 +19,6 @@
         ref="signaturePad"
       />
       <div>
-        <button @click="save">Save</button>
         <button @click="undo">Undo</button>
       </div>
     </div>
@@ -52,9 +51,7 @@ export default {
     date_of_birth: '',
     nationality: '',
     address: '',
-    sign: {
-      data: ''
-    },
+    sign: '',
     place: ''
   }),
   created () {
@@ -65,20 +62,17 @@ export default {
       this.selected_file = file[0]
       this.check_if_document_upload = true
     },
-    save () {
+    patchAnnex1 () {
       const { empty, data } = this.$refs.signaturePad.saveSignature()
       console.log(data)
       console.log(empty)
-      this.sign.data = data
-    },
-    patchAnnex1 () {
       axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/annex1`, {
         method: 'post',
         data: {
-          'name': 'John Doe',
+          'name': this.name,
           'date_of_birth': '1982-07-13',
-          'nationality': 'FR',
-          'address': 'Roadthing 10th, 4765 There',
+          'nationality': this.nationality,
+          'address': this.address,
           'sign':
             'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53M[...]]wYXRoPjwvc3ZnPg==',
           'place': 'Here'
@@ -88,7 +82,7 @@ export default {
         }
       }).then(res => {
         console.log(res.data)
-        this.value = true
+        // this.value = true
         // this.step = 2
       })
     },
