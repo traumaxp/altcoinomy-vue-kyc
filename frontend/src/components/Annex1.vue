@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{formStatus.annex1}}
     <q-separator />
     Name / Surname or Company name
     <q-input outlined />
@@ -53,23 +52,14 @@ Vue.use(VueSignaturePad)
 
 export default {
   data: () => ({
-    Optionscountry: [
-      'Suisse', 'France'
-    ],
-    id_card_front: '',
-    id_card_back: '',
-    firstname: '',
-    lastname: '',
-    dateOfBirth: '',
-    residentialAddress: '',
-    zipCode: '',
-    country: '',
+    name: '',
+    date_of_birth: '',
     nationality: '',
-    professionalActivity: '',
-    utilityBill: '',
-    formStatus: {
-      annex1: ''
-    }
+    address: '',
+    sign: {
+      data: ''
+    },
+    place: ''
   }),
   created () {
     this.subscriptionData()
@@ -83,22 +73,19 @@ export default {
       const { empty, data } = this.$refs.signaturePad.saveSignature()
       console.log(data)
       console.log(empty)
-      this.signature = data
+      this.sign.data = data
     },
     patchAnnex1 (value) {
       axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}`, {
         method: 'patch',
         data: {
-          'subscription_id': `${this.$route.params.id}`,
-          'groups': {
-            'basics': {
-              'fields': {
-                'subscribed_as': {
-                  'value': this.register_as
-                }
-              }
-            }
-          }
+          'name': 'John Doe',
+          'date_of_birth': '1982-07-13',
+          'nationality': 'FR',
+          'address': 'Roadthing 10th, 4765 There',
+          'sign':
+            'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53M[...]]wYXRoPjwvc3ZnPg==',
+          'place': 'Here'
         },
         headers: {
           'Authorization': `Bearer ${this.$store.state.token}`
@@ -109,16 +96,6 @@ export default {
         // this.step = 2
       })
     },
-    // "name": "John Doe",
-    // 9 / 16GETTING-STARTED.md
-    // 15/11/2019
-    // "date_of_birth": "1982-07-13",
-    // "nationality": "FR",
-    // "address": "Roadthing 10th, 4765 There",
-    // "sign":
-    // "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53M[...]]wYXRoPjwvc3ZnPg==",
-    // "place": "Here"
-    // }
     uploadFile () {
       let fd = new FormData()
       fd.append('file', this.selected_file)
