@@ -31,7 +31,7 @@
 
     <q-stepper-navigation>
       <q-btn
-        @click="patchAnnex1(done3)"
+        @click="patchAnnex1()"
         color="primary"
         label="Continue"
       />
@@ -80,9 +80,13 @@ export default {
       this.check_if_document_upload = true
     },
     save () {
-      const data = this.$refs.signaturePad.saveSignature()
+      const { empty, data } = this.$refs.signaturePad.saveSignature()
       console.log(data)
+      console.log(empty)
       this.signature = data
+    },
+    patchAnnex1 () {
+      console.log('hello')
     },
     uploadFile () {
       let fd = new FormData()
