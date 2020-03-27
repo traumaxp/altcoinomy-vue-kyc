@@ -11,8 +11,8 @@
     Nationality
     <q-select
       outlined
-      v-model="model"
-      :options="country"
+      v-model="country"
+      :options="Optionscountry"
     />
     Current Location
     <q-input outlined />
@@ -53,6 +53,20 @@ Vue.use(VueSignaturePad)
 
 export default {
   data: () => ({
+    Optionscountry: [
+      'Suisse', 'France'
+    ],
+    id_card_front: '',
+    id_card_back: '',
+    firstname: '',
+    lastname: '',
+    dateOfBirth: '',
+    residentialAddress: '',
+    zipCode: '',
+    country: '',
+    nationality: '',
+    professionalActivity: '',
+    utilityBill: '',
     formStatus: {
       annex1: ''
     }
@@ -65,12 +79,15 @@ export default {
       this.selected_file = file[0]
       this.check_if_document_upload = true
     },
-
+    save () {
+      console.log()
+    },
     uploadFile () {
       let fd = new FormData()
       fd.append('file', this.selected_file)
       console.log(this.selected_file)
       console.log(fd)
+      // Axios request
       // axios.post('/uploadFile', fd, {
       //   headers: { 'Content-Type': undefined }
       // }).then(function (response) {
