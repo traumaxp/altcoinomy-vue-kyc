@@ -8,11 +8,7 @@
     Address
     <q-input outlined />
     Nationality
-    <q-select
-      outlined
-      v-model="country"
-      :options="Optionscountry"
-    />
+    <q-select outlinedv />
     Current Location
     <q-input outlined />
     Signature of the counterparty <br>
@@ -75,9 +71,9 @@ export default {
       console.log(empty)
       this.sign.data = data
     },
-    patchAnnex1 (value) {
-      axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}`, {
-        method: 'patch',
+    patchAnnex1 () {
+      axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/annex1`, {
+        method: 'post',
         data: {
           'name': 'John Doe',
           'date_of_birth': '1982-07-13',
@@ -122,7 +118,6 @@ export default {
           }
         }).then(res => {
           console.log(res.data.groups)
-          this.formStatus.subscribeAs = res.data.groups.basics.fields.subscribed_as.status
         })
       }
     }
