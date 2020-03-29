@@ -8,7 +8,7 @@
     Address
     <q-input outlined />
     Nationality
-    <q-select outlinedv />
+    <q-input outlinedv />
     Current Location
     <q-input outlined />
     Signature of the counterparty <br>
@@ -69,10 +69,10 @@ export default {
       axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/annex1`, {
         method: 'post',
         data: {
-          'name': this.name,
+          'name': 'name',
           'date_of_birth': '1982-07-13',
-          'nationality': this.nationality,
-          'address': this.address,
+          'nationality': 'FR',
+          'address': '300 rue de la tour penchée',
           'sign':
             'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53M[...]]wYXRoPjwvc3ZnPg==',
           'place': 'Here'

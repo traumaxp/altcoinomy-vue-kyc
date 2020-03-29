@@ -125,7 +125,7 @@ export default {
       }
     }
   }),
-  beforeMount () {
+  mounted () {
     this.subscriptionData()
   },
   methods: {
