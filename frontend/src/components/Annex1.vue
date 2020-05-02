@@ -3,26 +3,31 @@
     <q-separator />
     Name / Surname or Company name
     <q-input
-      v-model="name"
       outlined
+      v-model="name"
+      :label="status"
     />
     Date of birth or Date of incorporation
     <q-input
       v-model="date_of_birth"
       outlined
+      :label="status"
     />
     Address
     <q-input
       v-model="address"
+      :label="status"
       outlined
     />
     Nationality
     <q-input
       v-model="nationality"
-      outlinedv
+      :label="status"
+      outlined
     />
     Current Location
     <q-input
+      :label="status"
       v-model="place"
       outlined
     />
@@ -66,7 +71,8 @@ export default {
     date_of_birth: '',
     nationality: '',
     address: '',
-    place: ''
+    place: '',
+    status: ''
   }),
   created () {
     this.subscriptionData()
@@ -110,6 +116,7 @@ export default {
           }
         }).then(res => {
           console.log(res.data.groups)
+          this.status = res.data.groups.annexes.fields.annex1.status
         })
       }
     }

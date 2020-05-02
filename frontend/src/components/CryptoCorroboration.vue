@@ -3,10 +3,11 @@
     Origin of the crypto funds
     <q-select
       :options="originCryptoFundChoice1"
+      :label="origin_of_funds"
       v-model="originCryptoFundData1"
       outlined
     />
-    Origin of the crypto funds
+    Origin of the crypto funds story
     <q-select
       :options="originCryptoFundChoice2"
       v-model="originCryptoFundData2"
@@ -53,22 +54,7 @@ import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 export default {
   data: () => ({
-    formStatus: {
-      individual: {
-        IdCardFront: '',
-        IdCardBack: '',
-        firstname: '',
-        lastname: '',
-        dateOfBirth: '',
-        residentialAddress: '',
-        zipCode: '',
-        city: '',
-        country: '',
-        nationality: '',
-        professionalActivity: '',
-        utilityBill: ''
-      }
-    },
+    origin_of_funds: '',
     originCryptoFundData1: '',
     originCryptoFundData2: '',
     originCryptoFundChoice1: [
@@ -141,12 +127,8 @@ export default {
             'crypto_tracing': {
               'fields': {
                 'origin_of_funds': {
-                  'value': '7898'
+                  'value': 'this.originCryptoFundData1'
                 }
-                // 'exchange_source': 'Binance',
-                // 'supporting_document1': '',
-                // 'supporting_document2': '',
-                // 'supporting_document3': ''
               }
             }
           }
@@ -169,8 +151,8 @@ export default {
             'Authorization': `Bearer ${this.$store.state.token}`
           }
         }).then(res => {
-          console.log(res.data.groups)
-          this.formStatus.subscribeAs = res.data.groups.basics.fields.subscribed_as.status
+          console.log(res.data.groups.crypto_tracing.fields.origin_of_funds.status)
+          this.origin_of_funds = res.data.groups.crypto_tracing.fields.origin_of_funds.status
         })
       }
     }
