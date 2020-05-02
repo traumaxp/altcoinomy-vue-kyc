@@ -125,9 +125,9 @@ export default {
       }
     }
   }),
-  mounted () {
-    this.subscriptionData()
-  },
+  // created () {
+  //   this.subscriptionData()
+  // },
   methods: {
     file_selected (file) {
       this.selected_file = file[0]

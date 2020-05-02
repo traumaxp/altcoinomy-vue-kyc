@@ -38,6 +38,7 @@
   </q-form>
 </template>
 <script>
+// import axios from 'axios'
 import { mapState } from 'vuex'
 export default {
   name: 'NewAccount',
@@ -53,6 +54,27 @@ export default {
     ...mapState('users', { loading: 'isCreatePending' })
   },
   methods: {
+    // registerCustomer () {
+    //   let dataCustomer = {
+    //     'username': 'string',
+    //     'email': 'string',
+    //     'telephone': 'string',
+    //     'plain_password': 'string',
+    //     'referal': 'string',
+    //     'authorize_contact': true,
+    //     'chip': 'string'
+    //   }
+    //   axios('https://api-staging.altcoinomy.com/api/v1/customers', {
+    //     method: 'post',
+    //     data: dataCustomer,
+    //     headers: {
+    //       'Authorization': `Bearer ${this.$store.state.token}`
+    //     }
+    //   }).then(res => {
+    //     console.log(res.data)
+    //     this.redirection(res.data.id)
+    //   })
+    // },
     register () {
       if (this.valid) {
         let data =
