@@ -93,8 +93,8 @@ export default {
         }
       }).then(res => {
         console.log(res.data)
-        // this.value = true
-        // this.step = 2
+        this.value = true
+        this.step = 2
       })
     },
     undo () {
