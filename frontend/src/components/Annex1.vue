@@ -2,15 +2,30 @@
   <div>
     <q-separator />
     Name / Surname or Company name
-    <q-input outlined />
+    <q-input
+      v-model="name"
+      outlined
+    />
     Date of birth or Date of incorporation
-    <q-input outlined />
+    <q-input
+      v-model="date_of_birth"
+      outlined
+    />
     Address
-    <q-input outlined />
+    <q-input
+      v-model="address"
+      outlined
+    />
     Nationality
-    <q-input outlinedv />
+    <q-input
+      v-model="nationality"
+      outlinedv
+    />
     Current Location
-    <q-input outlined />
+    <q-input
+      v-model="place"
+      outlined
+    />
     Signature of the counterparty <br>
     <div id="app">
       <VueSignaturePad
@@ -51,7 +66,6 @@ export default {
     date_of_birth: '',
     nationality: '',
     address: '',
-    sign: '',
     place: ''
   }),
   created () {
@@ -63,19 +77,16 @@ export default {
       this.check_if_document_upload = true
     },
     patchAnnex1 () {
-      const { empty, data } = this.$refs.signaturePad.saveSignature()
-      console.log(data)
-      console.log(empty)
+      const { data } = this.$refs.signaturePad.saveSignature()
       axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/annex1`, {
         method: 'post',
         data: {
-          'name': 'name',
-          'date_of_birth': '1982-07-13',
-          'nationality': 'FR',
-          'address': '300 rue de la tour penchée',
-          'sign':
-            'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53M[...]]wYXRoPjwvc3ZnPg==',
-          'place': 'Here'
+          'name': this.name,
+          'date_of_birth': this.date_of_birth,
+          'nationality': this.nationality,
+          'address': this.address,
+          'sign': data,
+          'place': this.place
         },
         headers: {
           'Authorization': `Bearer ${this.$store.state.token}`
@@ -85,19 +96,6 @@ export default {
         // this.value = true
         // this.step = 2
       })
-    },
-    uploadFile () {
-      let fd = new FormData()
-      fd.append('file', this.selected_file)
-      console.log(this.selected_file)
-      console.log(fd)
-      // Axios request
-      // axios.post('/uploadFile', fd, {
-      //   headers: { 'Content-Type': undefined }
-      // }).then(function (response) {
-      //   if (response.data.ok) {
-      //   }
-      // })
     },
     undo () {
       this.$refs.signaturePad.undoSignature()
