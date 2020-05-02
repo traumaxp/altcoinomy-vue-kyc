@@ -1,23 +1,21 @@
 <template>
   <div>
-    <q-uploader
-      url=""
-      extensions=".gif,.jpg,.jpeg,.png"
-      @add="file_selected"
-    />
-
-    <q-btn @click="uploadFile()">Upload</q-btn>
     ID card front (side with MRZ)
-    <q-uploader
-      outlined
-      :label="formStatus.individual.IdCardFront"
-    />
-
+    <vue-dropzone
+      ref="myVueDropzone"
+      id="dropzone"
+      :options="dropOptionsIdCardFront"
+    ></vue-dropzone>
     ID card back (side without MRZ)
+    <vue-dropzone
+      ref="myVueDropzone"
+      id="dropzone"
+      :options="dropOptionsIdCardBack"
+    ></vue-dropzone>
     <q-uploader
       outlined
       :label="formStatus.individual.IdCardBack"
-    />
+    /> -->
     First name
     <q-input
       outlined
@@ -71,10 +69,11 @@
     />
 
     Proof of Residence such as utility bill or bank statement (required if you plan to contribute more than CHF 15'000 equivalent).
-    <q-uploader
-      outlined
-      :label="formStatus.individual.utilityBill"
-    />
+    <vue-dropzone
+      ref="myVueDropzone"
+      id="dropzone"
+      :options="dropOptionsProofOfResidence"
+    ></vue-dropzone>
 
     <q-stepper-navigation>
       <q-btn
@@ -93,11 +92,11 @@
   </div>
 </template>
 <script>
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 import axios from 'axios'
 export default {
   data: () => ({
-    IdCardFront: '',
-    IdCardBack: '',
     firstname: '',
     lastname: '',
     dateOfBirth: '',
@@ -128,24 +127,57 @@ export default {
   // created () {
   //   this.subscriptionData()
   // },
+  components: {
+    vueDropzone: vue2Dropzone
+  },
+  computed: {
+    dropOptionsIdCardFront: function () {
+      return {
+        url: `https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/files`,
+        thumbnailWidth: 150,
+        paramName: 'files',
+        data: {
+          'type': 'id_card_mrz_side'
+        },
+        maxFilesize: 0.5,
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.token}`,
+          'Access-Control-Allow-Origin': '*'
+        }
+      }
+    },
+    dropOptionsIdCardBack: function () {
+      return {
+        url: `https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/files`,
+        thumbnailWidth: 150,
+        paramName: 'files',
+        data: {
+          'type': 'id_card_back_side'
+        },
+        maxFilesize: 0.5,
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.token}`,
+          'Access-Control-Allow-Origin': '*'
+        }
+      }
+    },
+    dropOptionsProofOfResidence: function () {
+      return {
+        url: `https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/files`,
+        thumbnailWidth: 150,
+        paramName: 'files',
+        data: {
+          'type': 'reliable_directory_proof'
+        },
+        maxFilesize: 0.5,
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.token}`,
+          'Access-Control-Allow-Origin': '*'
+        }
+      }
+    }
+  },
   methods: {
-    file_selected (file) {
-      this.selected_file = file[0]
-      this.check_if_document_upload = true
-    },
-
-    uploadFile () {
-      let fd = new FormData()
-      fd.append('file', this.selected_file)
-      console.log(this.selected_file)
-      console.log(fd)
-      // axios.post('/uploadFile', fd, {
-      //   headers: { 'Content-Type': undefined }
-      // }).then(function (response) {
-      //   if (response.data.ok) {
-      //   }
-      // })
-    },
     patchPersonalDetails (value) {
       axios(`https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}`, {
         method: 'patch',

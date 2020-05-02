@@ -68,44 +68,33 @@ export default {
   methods: {
     ...mapActions('users', ['get']),
     ...mapActions('auth', ['authenticate']),
-    hasType () {
-      if (this.authUser) {
-        return (
-          this.authUser.isInvestor ||
-          this.authUser.isSeeker ||
-          this.authUser.isAdmin
-        )
-      }
-    },
     login () {
       let username = this.user.username
       let password = this.user.password
       this.$store.dispatch('login', { username, password })
-      if (this.valid) {
-        this.authenticate({
-          strategy: 'local',
-          email: this.user.email,
-          password: this.user.password
-        })
-          .then(response => {
-            console.log(response)
-            // console.log(response.body)
-            if (response) {
-              this.$store.dispatch('postLogin', response.body).then(() => {
-                if (!this.hasType()) {
-                  this.$router.push({
-                    name: 'HomePage'
-                  })
-                } else {
-                  if (this.nextRoute !== 'stay') {
-                    // console.log('going to post-login route: ' + this.nextRoute)
-                    this.$router.push(this.nextRoute)
-                  }
+      this.authenticate({
+        strategy: 'local',
+        email: this.user.email,
+        password: this.user.password
+      })
+        .then(response => {
+          console.log(response)
+          // console.log(response.body)
+          if (response) {
+            this.$store.dispatch('postLogin', response.body).then(() => {
+              if (!this.hasType()) {
+                this.$router.push({
+                  name: 'HomePage'
+                })
+              } else {
+                if (this.nextRoute !== 'stay') {
+                  // console.log('going to post-login route: ' + this.nextRoute)
+                  this.$router.push(this.nextRoute)
                 }
-              })
-            }
-          })
-      }
+              }
+            })
+          }
+        })
     }
   }
 }

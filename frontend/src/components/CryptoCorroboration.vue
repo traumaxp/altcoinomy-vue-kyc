@@ -13,20 +13,23 @@
       outlined
     />
     First supporting document (if you have any other document to share with us)
-    <q-uploader
-      outlined
-      :label="formStatus.individual.utilityBill"
-    />
+    <vue-dropzone
+      ref="myVueDropzone"
+      id="dropzone"
+      :options="dropOptionsFirstSupport"
+    ></vue-dropzone>
     Second supporting document (if you have any other document to share with us)
-    <q-uploader
-      outlined
-      :label="formStatus.individual.utilityBill"
-    />
+    <vue-dropzone
+      ref="myVueDropzone"
+      id="dropzone"
+      :options="dropOptionsSecondSupport"
+    ></vue-dropzone>
     Third supporting document (if you have any other document to share with us)
-    <q-uploader
-      outlined
-      :label="formStatus.individual.utilityBill"
-    />
+    <vue-dropzone
+      ref="myVueDropzone"
+      id="dropzone"
+      :options="dropOptionsthirdSupport"
+    ></vue-dropzone>
 
     <q-stepper-navigation>
       <q-btn
@@ -46,7 +49,8 @@
 </template>
 <script>
 import axios from 'axios'
-
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 export default {
   data: () => ({
     formStatus: {
@@ -76,6 +80,56 @@ export default {
   }),
   created () {
     this.subscriptionData()
+  },
+  components: {
+    vueDropzone: vue2Dropzone
+  },
+  computed: {
+    dropOptionsFirstSupport: function () {
+      return {
+        url: `https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/files`,
+        thumbnailWidth: 150,
+        paramName: 'files',
+        data: {
+          'type': 'support_document_1'
+        },
+        maxFilesize: 0.5,
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.token}`,
+          'Access-Control-Allow-Origin': '*'
+        }
+      }
+    },
+    dropOptionsSecondSupport: function () {
+      return {
+        url: `https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/files`,
+        thumbnailWidth: 150,
+        paramName: 'files',
+        data: {
+          'type': 'support_document_2'
+        },
+        maxFilesize: 0.5,
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.token}`,
+          'Access-Control-Allow-Origin': '*'
+        }
+      }
+    },
+    dropOptionsthirdSupport: function () {
+      return {
+        url: `https://api-staging.altcoinomy.com/api/v1/subscriptions/${this.$route.params.id}/files`,
+        thumbnailWidth: 150,
+        paramName: 'files',
+        data: {
+          'type': 'support_document_3'
+        },
+        maxFilesize: 0.5,
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.token}`,
+          'Access-Control-Allow-Origin': '*'
+        }
+      }
+    }
   },
   methods: {
     patchCryptoCorroboration (value) {
