@@ -55,6 +55,7 @@
                 disable
                 label="completed"
               ></q-btn>
+              {{ico.id}}
               <q-btn
                 v-if="ico.date_to > dateNow"
                 size="sm"
